@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The free tool that tells Shopify founders what to order first</title>
+<meta name="description" content="Founder-led Shopify brands: a free tool that ranks every inventory order by what it earns — so your cash sits behind what sells. More profit, more cash in the bank." />
+<meta property="og:title" content="If you had $50,000 to spend on inventory this week, would you know what to buy first?" />
+<meta property="og:description" content="Free tool that ranks every order by what it earns. For founder-led Shopify brands." />
+<meta property="og:type" content="website" />
+<style>
+  :root{
+    --ink:#0E1116; --ink2:#191e26; --paper:#ffffff; --cream:#f7f5f0;
+    --line:#e7e2d8; --text:#23262b; --muted:#6b7178;
+    --gold:#c0892b; --gold-dark:#9c6f1f; --gold-soft:#f3e8d2; --danger:#b3402f;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --radius:12px; --maxw:1040px;
+    --shadow-lg:0 24px 60px rgba(14,17,22,.22);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--text);line-height:1.55;background:var(--paper);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  section{padding:60px 0}
+  h1{font-size:clamp(2.1rem,5.6vw,3.5rem);font-weight:800;line-height:1.08;letter-spacing:-.02em;color:#fff}
+  h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;line-height:1.12;letter-spacing:-.02em}
+  .eyebrow{display:inline-block;font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+  .btn{display:inline-block;background:var(--gold);color:var(--ink);border:none;font-family:var(--sans);font-size:1.05rem;font-weight:800;letter-spacing:.02em;text-transform:uppercase;padding:16px 26px;border-radius:10px;cursor:pointer;text-decoration:none;width:100%;text-align:center;transition:background .15s,transform .08s}
+  .btn:hover{background:var(--gold-dark);color:#fff}
+  .btn:active{transform:translateY(1px)}
+  .btn-ghost{display:inline-block;background:transparent;color:#fff;border:1.5px solid #39414d;font-weight:700;padding:14px 24px;border-radius:10px;text-decoration:none;width:100%;text-align:center;margin-top:10px}
+  .btn-ghost:hover{border-color:var(--gold)}
+
+  /* HERO */
+  .hero{background:var(--ink);color:#eef0f3;padding:64px 0 72px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .hero .sub{font-size:1.2rem;color:#aab1bb;margin-top:20px;max-width:560px}
+  .card{background:#fff;color:var(--text);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-lg)}
+  .card h3{font-size:1.2rem;font-weight:800;margin-bottom:4px}
+  .card .sub{color:var(--muted);font-size:.93rem;margin-bottom:16px}
+  .field{margin-bottom:12px}
+  .field label{display:block;font-size:.83rem;font-weight:600;margin-bottom:5px;color:var(--ink)}
+  .field .opt{font-weight:400;color:var(--muted)}
+  .field input,.field select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:9px;font-size:1rem;font-family:var(--sans);color:var(--text);background:#fff}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+  .trust{font-size:.82rem;color:var(--muted);margin-top:12px;text-align:center}
+  .hp{position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0}
+  .err{color:var(--danger);font-size:.85rem;margin-top:8px;display:none}
+  .thanks{display:none;text-align:center;padding:8px 4px}
+  .thanks .check{font-size:2.2rem}.thanks h3{font-size:1.35rem;font-weight:800;margin:8px 0}
+  .nextstep{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);text-align:left}
+  .nextstep p{font-size:.9rem;color:var(--muted);margin-bottom:10px}.nextstep strong{color:var(--ink)}
+  .btn-ghost.dark{color:var(--ink);border-color:var(--line)} .btn-ghost.dark:hover{border-color:var(--gold)}
+
+  /* PROOF */
+  .proof{background:var(--ink2);color:#dfe3e9;padding:26px 0}
+  .proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center}
+  .proof .num{font-size:1.5rem;font-weight:800;color:var(--gold);display:block}
+  .proof .lab{font-size:.88rem;color:#9aa2ad}
+  .proof .tag{text-align:center;color:#6c7682;font-size:.76rem;margin-top:16px;letter-spacing:.04em}
+
+  /* TOOL steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;text-align:center}
+  .step .n{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--ink);font-weight:800;margin-bottom:10px}
+  .step p{margin:0;font-weight:600;color:var(--ink)}
+
+  /* FINAL */
+  .finalcta{background:var(--ink);color:#fff;text-align:center}
+  .finalcta h2{color:#fff}
+  .finalcta p{color:#aab1bb;max-width:520px;margin:14px auto 24px}
+  .cta-row{display:flex;gap:14px;max-width:520px;margin:0 auto}
+  .cta-row .btn,.cta-row .btn-ghost{margin-top:0}
+
+  footer{background:var(--ink);color:#6c7682;text-align:center;padding:22px 0;font-size:.8rem;border-top:1px solid #232a33}
+  footer .disc{max-width:680px;margin:8px auto 0;color:#525a64;font-size:.72rem;line-height:1.5}
+
+  @media (max-width:840px){
+    .hero-grid{grid-template-columns:1fr;gap:30px}
+    .proof-grid{grid-template-columns:1fr;gap:14px}
+    .steps{grid-template-columns:1fr}
+    .cta-row{flex-direction:column}
+    section{padding:46px 0}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">For founder-led Shopify brands · 7–8 figures</span>
+      <h1>If you had $50,000 to spend on inventory this week, would you know what to buy first?</h1>
+      <p class="sub">Most founders guess. Get the free tool that ranks every order by what it earns — so your cash sits behind what actually makes money.</p>
+    </div>
+    <div class="card" id="formCard">
+      <div id="formView">
+        <h3>Get the free tool</h3>
+        <p class="sub">The spreadsheet + a 5-min walkthrough. Emailed to you instantly.</p>
+        <form id="leadForm" novalidate>
+          <div class="hp" aria-hidden="true"><label>Company fax</label><input type="text" name="company_fax" tabindex="-1" autocomplete="off" /></div>
+          <div class="field"><label for="name">Name</label><input type="text" id="name" name="name" autocomplete="name" required /></div>
+          <div class="field"><label for="email">Work email</label><input type="email" id="email" name="email" autocomplete="email" required /></div>
+          <div class="field"><label for="phone">Phone <span class="opt">(optional)</span></label><input type="tel" id="phone" name="phone" autocomplete="tel" /></div>
+          <div class="field"><label for="website">Company website</label><input type="text" id="website" name="website" placeholder="yourbrand.com" required /></div>
+          <div class="field"><label for="role">Your role</label>
+            <select id="role" name="role" required>
+              <option value="" disabled selected>Select one…</option>
+              <option>Founder / CEO</option><option>Owner / Co-founder</option><option>Ops / Supply chain</option><option>Finance</option><option>Other</option>
+            </select>
+          </div>
+          <button type="submit" class="btn" id="submitBtn">Get the free tool</button>
+          <div class="err" id="formErr">Please fill in your name, email, website, and role.</div>
+          <p class="trust">Free. No spam. Built by Kyle Kent — the system I run with 8-figure brands.</p>
+        </form>
+      </div>
+      <div class="thanks" id="thanksView">
+        <div class="check">✅</div>
+        <h3>You're in. Here's the tool.</h3>
+        <p class="sub">A copy is in your inbox too. Open it and watch the quick walkthrough.</p>
+        <a href="#" class="btn" id="templateBtn" target="_blank" rel="noopener">Open the tool →</a>
+        <a href="#" class="btn-ghost dark" id="loomBtn" target="_blank" rel="noopener">Watch the walkthrough →</a>
+        <div class="nextstep">
+          <p><strong>Want it run on your numbers?</strong> Book a free 30 minutes — I'll show you where your profit's hiding.</p>
+          <a href="#" class="btn-ghost dark" id="callBtnThanks" target="_blank" rel="noopener">Book a free 30-min call →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PROOF -->
+<div class="proof">
+  <div class="wrap">
+    <div class="proof-grid">
+      <div><span class="num">6× the math</span><span class="lab">what software told an 8-figure brand to order. Wrong.</span></div>
+      <div><span class="num">10 years of cover</span><span class="lab">26 styles overstocked while the best seller sold out.</span></div>
+      <div><span class="num">~$1,000 / day</span><span class="lab">one top seller bleeding sales to stockouts.</span></div>
+    </div>
+    <div class="tag">Real findings. Anonymized.</div>
+  </div>
+</div>
+
+<!-- TOOL -->
+<section>
+  <div class="wrap" style="text-align:center">
+    <span class="eyebrow" style="color:var(--gold-dark)">The free tool</span>
+    <h2>Your numbers in. One decision out.</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><p>Drop in your Shopify numbers</p></div>
+      <div class="step"><span class="n">2</span><p>Get one ranked buy list</p></div>
+      <div class="step"><span class="n">3</span><p>Order the winners, skip the rest</p></div>
+    </div>
+    <p style="color:var(--muted);margin-top:22px">What to order first, what waits, and where your cash is frozen. Every number checkable by hand.</p>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="finalcta">
+  <div class="wrap">
+    <h2>More profit. More cash in the bank.</h2>
+    <p>Inventory's just the start. Grab the free tool — or book a free 30 minutes.</p>
+    <div class="cta-row">
+      <a href="#formCard" class="btn" id="ctaBtn">Get the free tool</a>
+      <a href="#" class="btn-ghost" id="callBtnMain" target="_blank" rel="noopener">Book a free 30-min call</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; <span id="yr"></span> Kyle Kent. Plain math. Bottom-line results.</p>
+    <p class="disc">Figures shown are real, anonymized client findings and are not a guarantee of your results.</p>
+  </div>
+</footer>
+
+<script>
+/* ===== CONFIG — paste your values (see deploy brief) ===== */
+const APPS_SCRIPT_URL       = "https://script.google.com/macros/s/AKfycbyu_Qr8zyI25IgiMPWnnezy4kVlE1VzgEoW_kC57l3Ocbg6ncuFiU-Y_4XZ84IFW71g/exec";
+const TEMPLATE_COPY_LINK    = "https://docs.google.com/spreadsheets/d/1lduUsH7zUSBsRW-Q4zcm-9wuo5PIJKLcdNIWvdX1Y70/edit?gid=541225650#gid=541225650";
+const LOOM_WALKTHROUGH_LINK = "https://www.loom.com/share/38c80caf6696458694efe49b5d037761";
+const CALENDLY_LINK         = "https://calendly.com/kyle-doctordigits/30min";
+/* ========================================================= */
+document.getElementById('yr').textContent = new Date().getFullYear();
+document.getElementById('templateBtn').href  = TEMPLATE_COPY_LINK;
+document.getElementById('loomBtn').href       = LOOM_WALKTHROUGH_LINK;
+document.getElementById('callBtnThanks').href = CALENDLY_LINK;
+document.getElementById('callBtnMain').href   = CALENDLY_LINK;
+
+function getVisitorId(){
+  try{ let id=localStorage.getItem('drd_vid'); const ret=!!id;
+    if(!id){ id='v_'+Date.now().toString(36)+Math.random().toString(36).slice(2,9); localStorage.setItem('drd_vid',id);} return {id,ret};
+  }catch(e){ return {id:'v_'+Date.now().toString(36)+Math.random().toString(36).slice(2,9),ret:false}; }
+}
+const VISITOR=getVisitorId();
+function getParams(){ const p=new URLSearchParams(location.search); return {
+  utm_source:p.get('utm_source')||'',utm_medium:p.get('utm_medium')||'',utm_campaign:p.get('utm_campaign')||'',
+  utm_content:p.get('utm_content')||'',utm_term:p.get('utm_term')||'',referrer:document.referrer||'direct'}; }
+const PARAMS=getParams();
+const ENV={page:location.pathname+location.search,screen:(window.screen?screen.width+'x'+screen.height:''),
+  viewport:window.innerWidth+'x'+window.innerHeight,language:navigator.language||'',
+  timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone)||'',userAgent:navigator.userAgent||''};
+function send(payload){ const body=JSON.stringify(payload);
+  if(!APPS_SCRIPT_URL||APPS_SCRIPT_URL.indexOf('PASTE_')===0) return;
+  try{ const b=new Blob([body],{type:'text/plain;charset=UTF-8'}); if(navigator.sendBeacon&&navigator.sendBeacon(APPS_SCRIPT_URL,b)) return; }catch(e){}
+  try{ fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',body,keepalive:true}); }catch(e){} }
+const START=Date.now(); let maxScroll=0,reachedForm=false,submitted=false;
+send(Object.assign({type:'visit',visitorId:VISITOR.id,returning:VISITOR.ret},PARAMS,ENV));
+window.addEventListener('scroll',function(){ const h=document.documentElement;
+  const pct=Math.round(((h.scrollTop||document.body.scrollTop)+window.innerHeight)/h.scrollHeight*100);
+  if(pct>maxScroll) maxScroll=Math.min(100,pct); },{passive:true});
+var fc=document.getElementById('formCard');
+if('IntersectionObserver' in window){ new IntersectionObserver(function(es){es.forEach(e=>{if(e.isIntersecting)reachedForm=true;});},{threshold:.4}).observe(fc); }
+function sendEngagement(){ send({type:'engagement',visitorId:VISITOR.id,timeOnPageSec:Math.round((Date.now()-START)/1000),scrollDepthPct:maxScroll,reachedForm:reachedForm,submitted:submitted}); }
+window.addEventListener('pagehide',sendEngagement);
+document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden') sendEngagement(); });
+var form=document.getElementById('leadForm'),errBox=document.getElementById('formErr'),submitBtn=document.getElementById('submitBtn');
+form.addEventListener('submit',function(ev){ ev.preventDefault(); errBox.style.display='none';
+  if(form.company_fax.value.trim()!==''){return;} if(Date.now()-START<2000){return;}
+  var name=form.name.value.trim(),email=form.email.value.trim(),website=form.website.value.trim(),role=form.role.value.trim(),phone=form.phone.value.trim();
+  var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if(!name||!email||!website||!role||!ok){ errBox.textContent=(!ok&&email)?'Please enter a valid email address.':'Please fill in your name, email, website, and role.'; errBox.style.display='block'; return; }
+  submitBtn.disabled=true; submitBtn.textContent='Sending…'; submitted=true;
+  send(Object.assign({type:'lead',visitorId:VISITOR.id,name,email,phone,website,role},PARAMS,{timezone:ENV.timezone,userAgent:ENV.userAgent,referrer:PARAMS.referrer}));
+  setTimeout(function(){ document.getElementById('formView').style.display='none'; document.getElementById('thanksView').style.display='block'; },400);
+});
+document.getElementById('ctaBtn').addEventListener('click',function(e){ e.preventDefault(); document.getElementById('name').scrollIntoView({behavior:'smooth',block:'center'}); document.getElementById('name').focus(); });
+</script>
+</body>
+</html>
