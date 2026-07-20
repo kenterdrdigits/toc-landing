@@ -3,247 +3,270 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>How much $ is sitting uncollected in your NNN leases? | Doctor Digits</title>
-<meta name="description" content="Commercial landlords: find the CAM/TCAM money your tenants owe you. Free reconciliation workbook — or have it done for 10% of what's found. $0 if nothing is found." />
-<meta property="og:title" content="How much $ is sitting uncollected in your NNN leases?" />
-<meta property="og:description" content="One landlord: $172,065 never billed. Free workbook to do it yourself — or I do it for 10% of what I find. Nothing if I find nothing." />
+<title>Radically simple TICAM recovery | Doctor Digits</title>
+<meta name="description" content="Commercial landlords: find the TICAM (taxes, insurance + CAM) money your tenants owe you. Free reconciliation workbook — or have it done for 10% of what's found. $0 if nothing is found." />
+<meta property="og:title" content="Radically simple TICAM recovery" />
+<meta property="og:description" content="One landlord was owed $172,065 he never billed. Free workbook — or I find it for 10%. $0 if I find nothing." />
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --green:#6CFC93; --green-soft:#dbfde5; --ink:#191919; --dark:#2A2A2A;
-    --text:#212529; --muted:#5f6570; --line:#e8ebe9; --paper:#ffffff;
-    --head:"Host Grotesk",sans-serif; --body:"Space Grotesk",sans-serif;
-    --maxw:1080px; --pill:44px;
-    --shadow:0 18px 50px rgba(25,25,25,.10);
+    --cta:#5266EB; --cta-hover:#3F51D6;
+    --white:#f4f4f6; --dim:#c9cdd8; --dimmer:#9aa0b0;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:var(--body);color:var(--text);line-height:1.6;background:var(--paper);-webkit-font-smoothing:antialiased;
-    background-image:radial-gradient(900px 620px at 78% -80px, rgba(108,252,147,.50), rgba(108,252,147,0) 65%),
-                     radial-gradient(700px 500px at -10% 45%, rgba(108,252,147,.16), rgba(108,252,147,0) 60%);
-    background-repeat:no-repeat}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  h1,h2,h3{font-family:var(--head);font-weight:500;color:var(--ink);letter-spacing:-.01em}
-  h1{font-size:clamp(2.3rem,6vw,3.9rem);line-height:1.06}
-  h2{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.12}
-  .hl{position:relative;white-space:nowrap}
-  .hl::before{content:"";position:absolute;left:-.12em;right:-.12em;top:.14em;bottom:.02em;background:var(--green);border-radius:.35em .5em .4em .55em;transform:rotate(-1.2deg);z-index:-1}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:#000;border:none;
-    font-family:var(--body);font-size:1rem;font-weight:600;padding:15px 28px;border-radius:var(--pill);cursor:pointer;
-    text-decoration:none;transition:transform .12s,box-shadow .12s,background .12s}
-  .btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(108,252,147,.45)}
-  .btn .ar{font-weight:700}
-  .btn.dark{background:var(--dark);color:#fff}
-  .btn.dark:hover{box-shadow:0 10px 24px rgba(25,25,25,.28)}
-  .btn.big{font-size:1.08rem;padding:17px 32px}
+  html,body{height:100%}
+  body{
+    font-family:var(--sans);color:var(--white);-webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;
+    background:
+      radial-gradient(120% 55% at 50% 48%, rgba(232,180,140,.30) 0%, rgba(199,144,132,.15) 30%, rgba(0,0,0,0) 60%),
+      linear-gradient(180deg,
+        #2b3244 0%,
+        #48536e 20%,
+        #7c7e96 36%,
+        #b3907f 47%,
+        #6a6274 58%,
+        #3b3a48 70%,
+        #23242c 84%,
+        #15161c 100%);
+    background-attachment:fixed;
+  }
+  /* retail center scene */
+  .scene{position:fixed;left:0;right:0;bottom:0;z-index:0;pointer-events:none}
+  .scene svg{display:block;width:100%;height:auto;min-width:1100px;margin:0 auto}
+  .grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E")}
 
-  /* NAV */
-  nav{padding:22px 0}
-  .navrow{display:flex;align-items:center;justify-content:space-between}
-  .logo{font-family:var(--head);font-weight:700;font-size:1.7rem;color:var(--ink);text-decoration:none;position:relative;letter-spacing:-.02em}
-  .logo .swoosh{position:relative;z-index:0}
-  .logo .swoosh::before{content:"";position:absolute;left:-.08em;right:-.1em;top:.5em;bottom:-.08em;background:var(--green);border-radius:.4em;transform:rotate(-2deg);z-index:-1}
-  nav .btn{padding:11px 22px;font-size:.92rem}
+  .shell{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh}
+  .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 32px}
+
+  /* BRAND (uploaded DrDigits wordmark, recolored white-on-white) */
+  .brand{font-weight:700;font-size:2rem;letter-spacing:-.03em;color:var(--white);text-decoration:none;
+    margin-bottom:6.5vh;display:inline-block;text-shadow:0 2px 24px rgba(20,25,40,.4)}
+  .brand:hover{opacity:.85}
+  .tagline{margin-top:14px;font-size:.98rem;font-weight:400;letter-spacing:.04em;color:var(--dim);
+    text-shadow:0 1px 20px rgba(20,25,40,.5)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--cta);color:#fff;border:none;
+    font-family:var(--sans);font-size:.95rem;font-weight:500;padding:11px 22px;border-radius:24px;cursor:pointer;
+    text-decoration:none;transition:background .15s}
+  .btn:hover{background:var(--cta-hover)}
 
   /* HERO */
-  .hero{padding:64px 0 30px;text-align:center}
-  .hero .sub{font-size:1.15rem;color:var(--muted);max-width:640px;margin:22px auto 0}
-  .hero .sub b{color:var(--ink)}
-  .paths{display:flex;gap:16px;justify-content:center;margin-top:34px;flex-wrap:wrap}
-  .pathnote{font-size:.88rem;color:var(--muted);margin-top:14px}
+  .hero{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:5.5vh}
+  h1{font-weight:300;font-size:clamp(2.4rem,5.8vw,4.2rem);letter-spacing:-.015em;line-height:1.05;
+    text-shadow:0 2px 30px rgba(20,25,40,.45)}
+  .sub{margin:26px auto 0;max-width:620px;font-weight:400;font-size:1.13rem;line-height:1.55;color:var(--dim);
+    text-shadow:0 1px 20px rgba(20,25,40,.5)}
+  .sub b{color:var(--white);font-weight:500}
+  .sup{font-size:.6em;vertical-align:super}
 
-  /* STATS */
-  .stats{margin:56px auto 0;max-width:820px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 16px;text-align:center;box-shadow:var(--shadow)}
-  .stat .n{font-family:var(--head);font-weight:600;font-size:1.7rem;color:var(--ink);display:block}
-  .stat .l{font-size:.85rem;color:var(--muted);line-height:1.4;display:block;margin-top:4px}
-  .statnote{text-align:center;color:var(--muted);font-size:.78rem;margin-top:12px}
+  .ctarow{display:flex;align-items:center;gap:10px;margin-top:36px;flex-wrap:wrap;justify-content:center}
+  .emailwrap{display:flex;align-items:center;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);
+    border-radius:26px;padding:4px 4px 4px 20px;backdrop-filter:blur(8px)}
+  .emailwrap input{background:transparent;border:none;outline:none;color:var(--white);font-family:var(--sans);
+    font-size:.96rem;width:200px;padding:8px 10px 8px 0}
+  .emailwrap input::placeholder{color:rgba(244,244,246,.55)}
+  .emailwrap .btn{white-space:nowrap}
+  .btn-ghost{display:inline-flex;align-items:center;background:rgba(255,255,255,.10);color:var(--white);
+    border:1px solid rgba(255,255,255,.18);font-size:.95rem;font-weight:500;padding:11px 22px;border-radius:26px;
+    cursor:pointer;text-decoration:none;backdrop-filter:blur(8px);transition:background .15s}
+  .btn-ghost:hover{background:rgba(255,255,255,.18)}
+  .thanks{display:none;margin-top:36px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);
+    border-radius:16px;padding:18px 28px;backdrop-filter:blur(8px);max-width:520px}
+  .thanks p{font-size:.98rem;color:var(--white)}
+  .thanks .note{font-size:.8rem;color:var(--dimmer);margin-top:6px}
 
-  section{padding:66px 0}
+  /* proof strip */
+  .proof{display:flex;gap:14px;margin-top:6vh;flex-wrap:wrap;justify-content:center}
+  .chip{background:rgba(14,16,22,.42);border:1px solid rgba(255,255,255,.13);border-radius:14px;
+    padding:14px 22px;backdrop-filter:blur(10px);min-width:200px}
+  .chip .n{display:block;font-weight:500;font-size:1.25rem;letter-spacing:-.01em}
+  .chip .l{display:block;font-size:.8rem;color:var(--dim);margin-top:3px}
 
-  /* NOBODY'S JOB */
-  .nobody{background:transparent}
-  .nobody h2{text-align:center}
-  .nobody .lede{text-align:center;color:var(--muted);max-width:620px;margin:14px auto 0}
-  .jobs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
-  .job{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
-  .job .who{font-family:var(--head);font-weight:600;font-size:1.08rem;color:var(--ink)}
-  .job .no{display:inline-block;background:var(--green-soft);color:var(--ink);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:20px;padding:3px 10px;margin-bottom:10px}
-  .job p{font-size:.92rem;color:var(--muted);margin-top:6px}
-  .punch{text-align:center;font-family:var(--head);font-weight:500;font-size:clamp(1.2rem,2.6vw,1.5rem);color:var(--ink);max-width:680px;margin:38px auto 0}
+  /* footer disclaimer pill */
+  .discbar{margin:auto auto 24px;margin-top:8vh;max-width:860px;background:rgba(8,9,12,.68);
+    border-radius:10px;padding:10px 22px;font-size:.78rem;color:var(--dim);text-align:center;backdrop-filter:blur(8px)}
 
-  /* TWO PATHS */
-  .choose h2{text-align:center}
-  .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:38px;align-items:stretch}
-  .card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:var(--shadow);display:flex;flex-direction:column}
-  .card.offer{background:var(--ink);border-color:var(--ink);color:#e9ece9}
-  .card .tag{display:inline-block;background:var(--green);color:#000;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:20px;padding:4px 12px;margin-bottom:14px;align-self:flex-start}
-  .card h3{font-size:1.45rem;font-weight:600;margin-bottom:6px}
-  .card.offer h3{color:#fff}
-  .card .sub{color:var(--muted);font-size:.95rem;margin-bottom:18px}
-  .card.offer .sub{color:#aeb6ae}
-  .card ul{list-style:none;margin:0 0 20px}
-  .card li{font-size:.95rem;padding:7px 0 7px 26px;position:relative}
-  .card li::before{content:"✓";position:absolute;left:0;color:#1fae4b;font-weight:700}
-  .card.offer li::before{color:var(--green)}
-  .bignum{font-family:var(--head);font-weight:600;font-size:2.6rem;color:var(--green);line-height:1}
-  .bignum small{font-size:1rem;color:#aeb6ae;font-family:var(--body);font-weight:500}
-  .card .btn{width:100%;margin-top:auto}
-
-  /* FORM */
-  .field{margin-bottom:12px;text-align:left}
-  .field label{display:block;font-size:.83rem;font-weight:600;margin-bottom:5px;color:var(--ink)}
-  .field .opt{font-weight:400;color:var(--muted)}
-  .field input,.field select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:.98rem;font-family:var(--body);color:var(--text);background:#fff}
-  .field input:focus,.field select:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(108,252,147,.35)}
-  .trust{font-size:.8rem;color:var(--muted);margin-top:10px;text-align:center}
-  .hp{position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0}
-  .err{color:#b3402f;font-size:.85rem;margin-top:8px;display:none}
-  .thanks{display:none;text-align:center;padding:10px 4px}
-  .thanks .check{font-size:2rem}
-  .thanks h3{margin:8px 0 4px}
-  .thanks p{color:var(--muted);font-size:.92rem;margin-bottom:14px}
-  .thanks .btn{margin-top:8px}
-
-  footer{padding:34px 0 40px;text-align:center;color:var(--muted);font-size:.8rem}
-  footer .disc{max-width:700px;margin:10px auto 0;font-size:.72rem;color:#9aa09b;line-height:1.5}
-
-  @media (max-width:860px){
-    .jobs{grid-template-columns:1fr 1fr}
-    .cards{grid-template-columns:1fr}
-    .stats{grid-template-columns:1fr;max-width:420px}
-    section{padding:48px 0}
-  }
-  @media (max-width:520px){
-    .jobs{grid-template-columns:1fr}
-    .paths{flex-direction:column;align-items:stretch}
-    .hl{white-space:normal}
-    .hl::before{display:none}
+  @media (max-width:760px){
+    .navlinks{display:none}
+    .hero{padding-top:6vh}
+    .emailwrap input{width:140px}
   }
 </style>
 </head>
 <body>
+<div class="scene">
+<svg viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f6cf96" stop-opacity=".95"/>
+      <stop offset="55%" stop-color="#e8ad6c" stop-opacity=".9"/>
+      <stop offset="100%" stop-color="#c9854f" stop-opacity=".85"/>
+    </linearGradient>
+    <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f6cf96" stop-opacity=".30"/>
+      <stop offset="100%" stop-color="#f6cf96" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pave" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#23242b"/>
+      <stop offset="100%" stop-color="#141519"/>
+    </linearGradient>
+  </defs>
 
-<nav>
-  <div class="wrap navrow">
-    <a class="logo" href="https://doctordigits.com">Dr<span class="swoosh">Digits</span></a>
-    <a href="#" class="btn dark" id="navCall" target="_blank" rel="noopener">Book a Call <span class="ar">→</span></a>
-  </div>
-</nav>
+  <!-- distant tree line behind building -->
+  <path d="M0,255 C120,238 240,248 360,242 C520,234 620,246 760,240 C920,233 1080,247 1220,240 C1330,235 1400,244 1440,240 L1440,270 L0,270 Z" fill="#20242a" opacity=".9"/>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="wrap">
-    <h1>How much <span class="hl">$ is sitting uncollected</span><br>in your NNN leases?</h1>
-    <p class="sub">Most commercial landlords haven't billed years of CAM they're owed. One building I reconciled: <b>$172,065 collectible</b> — and another <b>$95,000 gone</b> because of one missed deadline.</p>
-    <div class="paths">
-      <a href="#workbook" class="btn big">Do it yourself — free workbook <span class="ar">→</span></a>
-      <a href="#" class="btn big dark" id="heroCall" target="_blank" rel="noopener">Have me do it — book a call <span class="ar">→</span></a>
-    </div>
-    <p class="pathnote">Done-for-you is 10% of what I find. <b>If I find nothing, you pay nothing.</b></p>
+  <!-- pavement -->
+  <rect x="0" y="300" width="1440" height="100" fill="url(#pave)"/>
+  <!-- sidewalk curb -->
+  <rect x="0" y="300" width="1440" height="8" fill="#2b2d35"/>
 
-    <div class="stats">
-      <div class="stat"><span class="n">$172,065</span><span class="l">collectible CAM, never billed — one building, four tenants</span></div>
-      <div class="stat"><span class="n">$95,000</span><span class="l">waived by one sentence: a 120-day billing deadline</span></div>
-      <div class="stat"><span class="n">4 years</span><span class="l">without a single tenant statement going out</span></div>
-    </div>
-    <p class="statnote">Real engagement. Anonymized — names, dates and amounts changed.</p>
-  </div>
-</header>
+  <!-- building -->
+  <rect x="230" y="150" width="1000" height="150" fill="#262932"/>
+  <!-- parapet cap -->
+  <rect x="222" y="144" width="1016" height="8" rx="3" fill="#31343f"/>
 
-<!-- NOBODY'S JOB -->
-<section class="nobody">
-  <div class="wrap">
-    <h2>Why hasn't it been billed? Because it's <span class="hl">nobody's job.</span></h2>
-    <p class="lede">Reconciling CAM takes someone who can read four different leases, model them, and tie them to your books. Look around your team:</p>
-    <div class="jobs">
-      <div class="job"><span class="no">Not them</span><div class="who">Your bookkeeper</div><p>Keeps clean books — but doesn't have the finance and modeling skills to turn four lease documents into a per-tenant calculation.</p></div>
-      <div class="job"><span class="no">Not them</span><div class="who">Your lawyer</div><p>Wrote the leases — but isn't an accountant. Nobody's asking them to reconcile clauses against a general ledger.</p></div>
-      <div class="job"><span class="no">Not them</span><div class="who">Your CPA</div><p>Files your taxes. If they take this on at all, it's $250 an hour for an uncertain outcome.</p></div>
-      <div class="job"><span class="no">Not you</span><div class="who">You</div><p>You're running the properties. Auditing leases, chasing tax bills and building models is exactly the work that keeps falling to the bottom of the pile.</p></div>
-    </div>
-    <p class="punch">So it never gets done — and every year that passes, deadlines lapse and money is quietly waived. Two ways to fix that today:</p>
-  </div>
-</section>
+  <!-- sign band -->
+  <rect x="230" y="162" width="1000" height="40" fill="#1e2028"/>
 
-<!-- TWO PATHS -->
-<section class="choose" id="choose">
-  <div class="wrap">
-    <div class="cards">
+  <!-- storefronts -->
+  <g>
+    <!-- pilasters -->
+    <rect x="230" y="150" width="14" height="150" fill="#31343f"/>
+    <rect x="472" y="162" width="12" height="138" fill="#31343f"/>
+    <rect x="714" y="162" width="12" height="138" fill="#31343f"/>
+    <rect x="956" y="162" width="12" height="138" fill="#31343f"/>
+    <rect x="1216" y="150" width="14" height="150" fill="#31343f"/>
 
-      <!-- DIY -->
-      <div class="card" id="workbook">
-        <span class="tag">Do it yourself · Free</span>
-        <h3>Get the free CAM reconciliation workbook</h3>
-        <p class="sub">The exact model from the $172K engagement (anonymized) — showing you how to structure the whole reconciliation, tab by tab.</p>
-        <ul>
-          <li>One tab per step: lease rules → ledger → caps → taxes → statement</li>
-          <li>Built from 4 real leases — every number checkable by hand</li>
-          <li>Emailed to you instantly, yours to keep</li>
-        </ul>
-        <div id="formView">
-          <form id="leadForm" novalidate>
-            <div class="hp" aria-hidden="true"><label>Company fax</label><input type="text" name="company_fax" tabindex="-1" autocomplete="off" /></div>
-            <div class="field"><label for="name">Name</label><input type="text" id="name" name="name" autocomplete="name" required /></div>
-            <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required /></div>
-            <div class="field"><label for="website">Company website <span class="opt">(or "none")</span></label><input type="text" id="website" name="website" placeholder="yourproperties.com" required /></div>
-            <div class="field"><label for="role">Your role</label>
-              <select id="role" name="role" required>
-                <option value="" disabled selected>Select one…</option>
-                <option>Owner / Landlord</option><option>Property manager</option><option>Bookkeeper / Accountant</option><option>Commercial tenant</option><option>Other</option>
-              </select>
-            </div>
-            <button type="submit" class="btn" id="submitBtn" style="width:100%">Send me the workbook <span class="ar">→</span></button>
-            <div class="err" id="formErr">Please fill in your name, email, website, and role.</div>
-            <p class="trust">Free. No spam. The same model I run on real buildings.</p>
-          </form>
-        </div>
-        <div class="thanks" id="thanksView">
-          <div class="check">✅</div>
-          <h3>It's on the way.</h3>
-          <p>A copy is in your inbox too. Open it and follow the tabs left to right.</p>
-          <a href="#" class="btn" id="templateBtn" target="_blank" rel="noopener">Open the workbook <span class="ar">→</span></a>
-        </div>
+    <!-- glass: four stores -->
+    <g>
+      <rect x="252" y="212" width="212" height="88" fill="url(#glass)"/>
+      <rect x="492" y="212" width="214" height="88" fill="url(#glass)" opacity=".92"/>
+      <rect x="734" y="212" width="214" height="88" fill="url(#glass)" opacity=".96"/>
+      <rect x="976" y="212" width="232" height="88" fill="url(#glass)" opacity=".9"/>
+    </g>
+    <!-- mullions -->
+    <g fill="#1b1d24">
+      <rect x="303" y="212" width="5" height="88"/><rect x="356" y="212" width="5" height="88"/><rect x="409" y="212" width="5" height="88"/>
+      <rect x="545" y="212" width="5" height="88"/><rect x="598" y="212" width="5" height="88"/><rect x="651" y="212" width="5" height="88"/>
+      <rect x="787" y="212" width="5" height="88"/><rect x="840" y="212" width="5" height="88"/><rect x="893" y="212" width="5" height="88"/>
+      <rect x="1032" y="212" width="5" height="88"/><rect x="1090" y="212" width="5" height="88"/><rect x="1148" y="212" width="5" height="88"/>
+      <!-- transom line -->
+      <rect x="252" y="238" width="956" height="3" opacity=".8"/>
+      <!-- door frames -->
+      <rect x="352" y="244" width="62" height="56" fill="none" stroke="#1b1d24" stroke-width="4"/>
+      <rect x="594" y="244" width="62" height="56" fill="none" stroke="#1b1d24" stroke-width="4"/>
+      <rect x="836" y="244" width="62" height="56" fill="none" stroke="#1b1d24" stroke-width="4"/>
+      <rect x="1086" y="244" width="62" height="56" fill="none" stroke="#1b1d24" stroke-width="4"/>
+    </g>
+
+    <!-- tenant signs -->
+    <g font-family="Inter, sans-serif" font-size="15" letter-spacing="5" fill="#e9e3d8" opacity=".85" text-anchor="middle" font-weight="500">
+      <text x="358" y="188">COFFEE</text>
+      <text x="600" y="188">SUBS</text>
+      <text x="842" y="188">BURRITOS</text>
+      <text x="1092" y="188">WIRELESS</text>
+    </g>
+  </g>
+
+  <!-- warm light spill on sidewalk -->
+  <g opacity=".10" fill="#f6cf96">
+    <ellipse cx="358" cy="312" rx="130" ry="14"/>
+    <ellipse cx="600" cy="312" rx="130" ry="14"/>
+    <ellipse cx="842" cy="312" rx="130" ry="14"/>
+    <ellipse cx="1092" cy="312" rx="130" ry="14"/>
+  </g>
+
+  <!-- pylon sign -->
+  <g>
+    <rect x="118" y="160" width="12" height="140" fill="#2b2d35"/>
+    <rect x="66" y="96" width="116" height="64" rx="8" fill="#20222a" stroke="#3a3d49" stroke-width="2"/>
+    <g font-family="Inter, sans-serif" text-anchor="middle" fill="#e9e3d8">
+      <text x="124" y="123" font-size="12" letter-spacing="2" opacity=".9" font-weight="500">HARBORVIEW</text>
+      <text x="124" y="143" font-size="11" letter-spacing="4" opacity=".65">PLAZA</text>
+    </g>
+  </g>
+
+  <!-- parking stripes -->
+  <g stroke="#c9cdd8" stroke-width="4" opacity=".14" stroke-linecap="round">
+    <path d="M180,392 L206,344"/>
+    <path d="M330,392 L356,344"/>
+    <path d="M480,392 L506,344"/>
+    <path d="M630,392 L656,344"/>
+    <path d="M780,392 L806,344"/>
+    <path d="M930,392 L956,344"/>
+    <path d="M1080,392 L1106,344"/>
+    <path d="M1230,392 L1256,344"/>
+  </g>
+
+  <!-- parking lot lamps -->
+  <g>
+    <rect x="46" y="196" width="6" height="152" fill="#2b2d35"/>
+    <rect x="30" y="190" width="40" height="7" rx="3.5" fill="#2b2d35"/>
+    <ellipse cx="50" cy="205" rx="70" ry="34" fill="url(#lampGlow)"/>
+    <rect x="1388" y="196" width="6" height="152" fill="#2b2d35"/>
+    <rect x="1372" y="190" width="40" height="7" rx="3.5" fill="#2b2d35"/>
+    <ellipse cx="1392" cy="205" rx="70" ry="34" fill="url(#lampGlow)"/>
+  </g>
+
+  <!-- bushes flanking building -->
+  <g fill="#1d222a">
+    <ellipse cx="212" cy="298" rx="34" ry="16"/>
+    <ellipse cx="1252" cy="298" rx="34" ry="16"/>
+  </g>
+</svg>
+</div>
+<div class="grain"></div>
+
+<div class="shell">
+  <header class="hero wrap">
+    <a class="brand" href="https://doctordigits.com" aria-label="DrDigits">DrDigits</a>
+    <h1>Radically simple<br>TICAM recovery</h1>
+    <p class="tagline">(taxes, insurance + common area maintenance)</p>
+    <p class="sub">Your tenants probably owe you money. One landlord was owed <b>$172,065</b> he never billed<span class="sup">1</span> — and lost <b>$95,000</b> to a single sentence in a lease. Nobody on your team is reconciling this. I am.</p>
+
+    <div class="ctarow" id="ctaRow">
+      <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0"><label>Company fax</label><input type="text" id="company_fax" tabindex="-1" autocomplete="off" /></div>
+      <div class="emailwrap">
+        <input type="email" id="email" placeholder="Enter your email" />
+        <button class="btn" id="submitBtn" onclick="submitEmail()">Get the workbook</button>
       </div>
-
-      <!-- DFY -->
-      <div class="card offer">
-        <span class="tag">Have me do it · No risk</span>
-        <h3>I find the money. You keep 90% of it.</h3>
-        <p class="sub">I read your leases, reconcile them against your books, and hand you statements your tenants can actually be billed on.</p>
-        <div style="margin:6px 0 18px"><span class="bignum">10% <small>of what I find — that's the whole fee</small></span></div>
-        <ul>
-          <li>No retainer, no hourly — $0 if I find nothing</li>
-          <li>Every number traces to a lease clause or a ledger line</li>
-          <li>Deadlines calendared so money never lapses again</li>
-          <li>30-minute call first: bring the leases, I'll tell you if there's money in them</li>
-        </ul>
-        <a href="#" class="btn" id="offerCall" target="_blank" rel="noopener">Book a free 30-min call <span class="ar">→</span></a>
-      </div>
-
+      <a href="#" class="btn-ghost" id="callBtn" target="_blank" rel="noopener">Have me do it — 10%</a>
     </div>
-  </div>
-</section>
+    <div class="thanks" id="thanks">
+      <p>✅ You're in — the TICAM workbook is on its way to your inbox.</p>
+      <p class="note">Open it and follow the tabs left to right — lease rules, ledger, caps, taxes, statement.</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap">
+        <a href="#" class="btn" id="templateBtn" target="_blank" rel="noopener">Open the workbook</a>
+        <a href="#" class="btn-ghost" id="callBtnThanks" target="_blank" rel="noopener">Book a free 30-min call</a>
+      </div>
+    </div>
 
-<footer>
-  <div class="wrap">
-    <p>© <span id="yr"></span> Doctor Digits · <a href="https://doctordigits.com" style="color:inherit">doctordigits.com</a></p>
-    <p class="disc">The case study shown is a real, anonymized composite engagement — names, places, dates and amounts are fictional. Nothing here is legal or tax advice; your lease language controls. Contingency engagements subject to a written agreement. Results are not guaranteed.</p>
+    <div class="proof">
+      <div class="chip"><span class="n">$172,065</span><span class="l">collectible CAM, never billed</span></div>
+      <div class="chip"><span class="n">$95,000</span><span class="l">waived by one missed deadline</span></div>
+      <div class="chip"><span class="n">10% · $0</span><span class="l">my fee on what I find · if I find nothing</span></div>
+    </div>
+  </header>
+
+  <div class="discbar wrap">
+    <span class="sup">1</span> Anonymized composite case study — names, places, dates and amounts are fictional. Not legal or tax advice — your lease language controls. Contingency engagements subject to a written agreement.
   </div>
-</footer>
+</div>
 
 <script>
-/* ===== CONFIG — paste your values before go-live ===== */
-const APPS_SCRIPT_URL       = "https://script.google.com/macros/s/AKfycbyu_Qr8zyI25IgiMPWnnezy4kVlE1VzgEoW_kC57l3Ocbg6ncuFiU-Y_4XZ84IFW71g/exec";
-const TEMPLATE_COPY_LINK    = "https://docs.google.com/spreadsheets/d/1BH-3HftNL5dI2s3ddw_GOhbdsF9wCSn2/copy";
-const CALENDLY_LINK         = "https://calendly.com/kyle-doctordigits/30min";
-/* ===================================================== */
-document.getElementById('yr').textContent = new Date().getFullYear();
-document.getElementById('templateBtn').href = TEMPLATE_COPY_LINK;
-['navCall','heroCall','offerCall'].forEach(id => document.getElementById(id).href = CALENDLY_LINK);
+/* ===== CONFIG ===== */
+const APPS_SCRIPT_URL    = "https://script.google.com/macros/s/AKfycbyu_Qr8zyI25IgiMPWnnezy4kVlE1VzgEoW_kC57l3Ocbg6ncuFiU-Y_4XZ84IFW71g/exec";
+const TEMPLATE_COPY_LINK = "https://docs.google.com/spreadsheets/d/1BH-3HftNL5dI2s3ddw_GOhbdsF9wCSn2/copy";
+const CALENDLY_LINK      = "https://calendly.com/kyle-doctordigits/30min";
+/* ================== */
+document.getElementById('templateBtn').href   = TEMPLATE_COPY_LINK;
+document.getElementById('callBtn').href       = CALENDLY_LINK;
+document.getElementById('callBtnThanks').href = CALENDLY_LINK;
 
 function getVisitorId(){
   try{ let id=localStorage.getItem('drd_tcam_vid'); const ret=!!id;
@@ -262,26 +285,27 @@ function send(payload){ const body=JSON.stringify(payload);
   if(!APPS_SCRIPT_URL||APPS_SCRIPT_URL.indexOf('PASTE_')===0) return;
   try{ const b=new Blob([body],{type:'text/plain;charset=UTF-8'}); if(navigator.sendBeacon&&navigator.sendBeacon(APPS_SCRIPT_URL,b)) return; }catch(e){}
   try{ fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',body,keepalive:true}); }catch(e){} }
-const START=Date.now(); let maxScroll=0,reachedForm=false,submitted=false;
+const START=Date.now(); let maxScroll=0,reachedForm=true,submitted=false;
 send(Object.assign({type:'visit',visitorId:VISITOR.id,returning:VISITOR.ret},PARAMS,ENV));
 window.addEventListener('scroll',function(){ const h=document.documentElement;
   const pct=Math.round(((h.scrollTop||document.body.scrollTop)+window.innerHeight)/h.scrollHeight*100);
   if(pct>maxScroll) maxScroll=Math.min(100,pct); },{passive:true});
-var fc=document.getElementById('workbook');
-if('IntersectionObserver' in window){ new IntersectionObserver(function(es){es.forEach(e=>{if(e.isIntersecting)reachedForm=true;});},{threshold:.4}).observe(fc); }
 function sendEngagement(){ send({type:'engagement',visitorId:VISITOR.id,timeOnPageSec:Math.round((Date.now()-START)/1000),scrollDepthPct:maxScroll,reachedForm:reachedForm,submitted:submitted}); }
 window.addEventListener('pagehide',sendEngagement);
 document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden') sendEngagement(); });
-var form=document.getElementById('leadForm'),errBox=document.getElementById('formErr'),submitBtn=document.getElementById('submitBtn');
-form.addEventListener('submit',function(ev){ ev.preventDefault(); errBox.style.display='none';
-  if(form.company_fax.value.trim()!==''){return;} if(Date.now()-START<2000){return;}
-  var name=form.name.value.trim(),email=form.email.value.trim(),website=form.website.value.trim(),role=form.role.value.trim();
-  var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  if(!name||!email||!website||!role||!ok){ errBox.textContent=(!ok&&email)?'Please enter a valid email address.':'Please fill in your name, email, website, and role.'; errBox.style.display='block'; return; }
-  submitBtn.disabled=true; submitBtn.textContent='Sending…'; submitted=true;
-  send(Object.assign({type:'lead',product:'tcam',visitorId:VISITOR.id,name,email,phone:'',website,role},PARAMS,{timezone:ENV.timezone,userAgent:ENV.userAgent,referrer:PARAMS.referrer}));
-  setTimeout(function(){ document.getElementById('formView').style.display='none'; document.getElementById('thanksView').style.display='block'; },400);
-});
+
+function submitEmail(){
+  var input=document.getElementById('email'), btn=document.getElementById('submitBtn');
+  var v=input.value.trim();
+  var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  if(!ok){ input.placeholder='Enter a valid email'; input.value=''; return; }
+  if(document.getElementById('company_fax').value.trim()!==''){ return; }
+  if(Date.now()-START<2000){ return; }
+  btn.disabled=true; btn.textContent='Sending…'; submitted=true;
+  send(Object.assign({type:'lead',product:'tcam',visitorId:VISITOR.id,name:'',email:v,phone:'',website:'',role:''},PARAMS,{timezone:ENV.timezone,userAgent:ENV.userAgent,referrer:PARAMS.referrer}));
+  setTimeout(function(){ document.getElementById('ctaRow').style.display='none'; document.getElementById('thanks').style.display='block'; },400);
+}
+document.getElementById('email').addEventListener('keydown',function(e){ if(e.key==='Enter') submitEmail(); });
 </script>
 </body>
 </html>
