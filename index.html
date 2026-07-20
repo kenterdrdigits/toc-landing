@@ -3,190 +3,356 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The free tool that tells Shopify founders what to order first</title>
-<meta name="description" content="Founder-led Shopify brands: a free tool that ranks every inventory order by what it earns — so your cash sits behind what sells. More profit, more cash in the bank." />
-<meta property="og:title" content="If you had $50,000 to spend on inventory this week, would you know what to buy first?" />
-<meta property="og:description" content="Free tool that ranks every order by what it earns. For founder-led Shopify brands." />
+<title>Radically simple inventory buying | Doctor Digits</title>
+<meta name="description" content="Founder-led Shopify brands: the free open-to-buy tool that ranks every inventory order by what it earns — so your cash sits behind what actually sells." />
+<meta property="og:title" content="Radically simple inventory buying" />
+<meta property="og:description" content="One 8-figure brand's software said order 6× the math while the best seller bled ~$1,000/day. Free tool that ranks every order by what it earns." />
 <meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0E1116; --ink2:#191e26; --paper:#ffffff; --cream:#f7f5f0;
-    --line:#e7e2d8; --text:#23262b; --muted:#6b7178;
-    --gold:#c0892b; --gold-dark:#9c6f1f; --gold-soft:#f3e8d2; --danger:#b3402f;
-    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    --radius:12px; --maxw:1040px;
-    --shadow-lg:0 24px 60px rgba(14,17,22,.22);
+    --cta:#5266EB; --cta-hover:#3F51D6;
+    --white:#f4f4f6; --dim:#c9cdd8; --dimmer:#9aa0b0;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:var(--sans);color:var(--text);line-height:1.55;background:var(--paper);-webkit-font-smoothing:antialiased}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  section{padding:60px 0}
-  h1{font-size:clamp(2.1rem,5.6vw,3.5rem);font-weight:800;line-height:1.08;letter-spacing:-.02em;color:#fff}
-  h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;line-height:1.12;letter-spacing:-.02em}
-  .eyebrow{display:inline-block;font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
-  .btn{display:inline-block;background:var(--gold);color:var(--ink);border:none;font-family:var(--sans);font-size:1.05rem;font-weight:800;letter-spacing:.02em;text-transform:uppercase;padding:16px 26px;border-radius:10px;cursor:pointer;text-decoration:none;width:100%;text-align:center;transition:background .15s,transform .08s}
-  .btn:hover{background:var(--gold-dark);color:#fff}
-  .btn:active{transform:translateY(1px)}
-  .btn-ghost{display:inline-block;background:transparent;color:#fff;border:1.5px solid #39414d;font-weight:700;padding:14px 24px;border-radius:10px;text-decoration:none;width:100%;text-align:center;margin-top:10px}
-  .btn-ghost:hover{border-color:var(--gold)}
+  html,body{height:100%}
+  body{
+    font-family:var(--sans);color:var(--white);-webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;
+    background:
+      radial-gradient(120% 55% at 50% 48%, rgba(232,180,140,.30) 0%, rgba(199,144,132,.15) 30%, rgba(0,0,0,0) 60%),
+      linear-gradient(180deg,
+        #2b3244 0%,
+        #48536e 20%,
+        #7c7e96 36%,
+        #b3907f 47%,
+        #6a6274 58%,
+        #3b3a48 70%,
+        #23242c 84%,
+        #15161c 100%);
+    background-attachment:fixed;
+  }
+  /* retail center scene */
+  .scene{position:fixed;left:0;right:0;bottom:0;z-index:0;pointer-events:none}
+  .scene svg{display:block;width:100%;height:auto;min-width:1100px;margin:0 auto}
+  .grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E")}
+
+  .shell{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh}
+  .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 32px}
+
+  /* BRAND (uploaded DrDigits wordmark, recolored white-on-white) */
+  .brand{font-weight:700;font-size:2rem;letter-spacing:-.03em;color:var(--white);text-decoration:none;
+    margin-bottom:6.5vh;display:inline-block;text-shadow:0 2px 24px rgba(20,25,40,.4)}
+  .brand:hover{opacity:.85}
+  .tagline{margin-top:14px;font-size:.98rem;font-weight:400;letter-spacing:.04em;color:var(--dim);
+    text-shadow:0 1px 20px rgba(20,25,40,.5)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--cta);color:#fff;border:none;
+    font-family:var(--sans);font-size:.95rem;font-weight:500;padding:11px 22px;border-radius:24px;cursor:pointer;
+    text-decoration:none;transition:background .15s}
+  .btn:hover{background:var(--cta-hover)}
 
   /* HERO */
-  .hero{background:var(--ink);color:#eef0f3;padding:64px 0 72px}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
-  .hero .sub{font-size:1.2rem;color:#aab1bb;margin-top:20px;max-width:560px}
-  .card{background:#fff;color:var(--text);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-lg)}
-  .card h3{font-size:1.2rem;font-weight:800;margin-bottom:4px}
-  .card .sub{color:var(--muted);font-size:.93rem;margin-bottom:16px}
-  .field{margin-bottom:12px}
-  .field label{display:block;font-size:.83rem;font-weight:600;margin-bottom:5px;color:var(--ink)}
-  .field .opt{font-weight:400;color:var(--muted)}
-  .field input,.field select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:9px;font-size:1rem;font-family:var(--sans);color:var(--text);background:#fff}
-  .field input:focus,.field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
-  .trust{font-size:.82rem;color:var(--muted);margin-top:12px;text-align:center}
-  .hp{position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0}
-  .err{color:var(--danger);font-size:.85rem;margin-top:8px;display:none}
-  .thanks{display:none;text-align:center;padding:8px 4px}
-  .thanks .check{font-size:2.2rem}.thanks h3{font-size:1.35rem;font-weight:800;margin:8px 0}
-  .nextstep{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);text-align:left}
-  .nextstep p{font-size:.9rem;color:var(--muted);margin-bottom:10px}.nextstep strong{color:var(--ink)}
-  .btn-ghost.dark{color:var(--ink);border-color:var(--line)} .btn-ghost.dark:hover{border-color:var(--gold)}
+  .hero{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:5.5vh}
+  h1{font-weight:300;font-size:clamp(2.4rem,5.8vw,4.2rem);letter-spacing:-.015em;line-height:1.05;
+    text-shadow:0 2px 30px rgba(20,25,40,.45)}
+  .sub{margin:26px auto 0;max-width:620px;font-weight:400;font-size:1.13rem;line-height:1.55;color:var(--dim);
+    text-shadow:0 1px 20px rgba(20,25,40,.5)}
+  .sub b{color:var(--white);font-weight:500}
+  .sup{font-size:.6em;vertical-align:super}
 
-  /* PROOF */
-  .proof{background:var(--ink2);color:#dfe3e9;padding:26px 0}
-  .proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center}
-  .proof .num{font-size:1.5rem;font-weight:800;color:var(--gold);display:block}
-  .proof .lab{font-size:.88rem;color:#9aa2ad}
-  .proof .tag{text-align:center;color:#6c7682;font-size:.76rem;margin-top:16px;letter-spacing:.04em}
+  .ctarow{display:flex;align-items:center;gap:10px;margin-top:36px;flex-wrap:wrap;justify-content:center}
+  .emailwrap{display:flex;align-items:center;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);
+    border-radius:26px;padding:4px 4px 4px 20px;backdrop-filter:blur(8px)}
+  .emailwrap input{background:transparent;border:none;outline:none;color:var(--white);font-family:var(--sans);
+    font-size:.96rem;width:200px;padding:8px 10px 8px 0}
+  .emailwrap input::placeholder{color:rgba(244,244,246,.55)}
+  .emailwrap .btn{white-space:nowrap}
+  .btn-ghost{display:inline-flex;align-items:center;background:rgba(255,255,255,.10);color:var(--white);
+    border:1px solid rgba(255,255,255,.18);font-size:.95rem;font-weight:500;padding:11px 22px;border-radius:26px;
+    cursor:pointer;text-decoration:none;backdrop-filter:blur(8px);transition:background .15s}
+  .btn-ghost:hover{background:rgba(255,255,255,.18)}
+  .thanks{display:none;margin-top:36px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);
+    border-radius:16px;padding:18px 28px;backdrop-filter:blur(8px);max-width:520px}
+  .thanks p{font-size:.98rem;color:var(--white)}
+  .thanks .note{font-size:.8rem;color:var(--dimmer);margin-top:6px}
 
-  /* TOOL steps */
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
-  .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;text-align:center}
-  .step .n{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--ink);font-weight:800;margin-bottom:10px}
-  .step p{margin:0;font-weight:600;color:var(--ink)}
+  /* proof strip */
+  .proof{display:flex;gap:14px;margin-top:6vh;flex-wrap:wrap;justify-content:center}
+  .chip{background:rgba(14,16,22,.42);border:1px solid rgba(255,255,255,.13);border-radius:14px;
+    padding:14px 22px;backdrop-filter:blur(10px);min-width:200px}
+  .chip .n{display:block;font-weight:500;font-size:1.25rem;letter-spacing:-.01em}
+  .chip .l{display:block;font-size:.8rem;color:var(--dim);margin-top:3px}
 
-  /* FINAL */
-  .finalcta{background:var(--ink);color:#fff;text-align:center}
-  .finalcta h2{color:#fff}
-  .finalcta p{color:#aab1bb;max-width:520px;margin:14px auto 24px}
-  .cta-row{display:flex;gap:14px;max-width:520px;margin:0 auto}
-  .cta-row .btn,.cta-row .btn-ghost{margin-top:0}
+  /* footer disclaimer pill */
+  .discbar{margin:auto auto 24px;margin-top:8vh;max-width:860px;background:rgba(8,9,12,.68);
+    border-radius:10px;padding:10px 22px;font-size:.78rem;color:var(--dim);text-align:center;backdrop-filter:blur(8px)}
 
-  footer{background:var(--ink);color:#6c7682;text-align:center;padding:22px 0;font-size:.8rem;border-top:1px solid #232a33}
-  footer .disc{max-width:680px;margin:8px auto 0;color:#525a64;font-size:.72rem;line-height:1.5}
-
-  @media (max-width:840px){
-    .hero-grid{grid-template-columns:1fr;gap:30px}
-    .proof-grid{grid-template-columns:1fr;gap:14px}
-    .steps{grid-template-columns:1fr}
-    .cta-row{flex-direction:column}
-    section{padding:46px 0}
+  @media (max-width:760px){
+    .navlinks{display:none}
+    .hero{padding-top:6vh}
+    .emailwrap input{width:140px}
   }
 </style>
 </head>
 <body>
+<div class="scene">
+<svg viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <linearGradient id="boxglow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f6cf96" stop-opacity=".95"/>
+      <stop offset="100%" stop-color="#c9854f" stop-opacity=".85"/>
+    </linearGradient>
+    <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f6cf96" stop-opacity=".28"/>
+      <stop offset="100%" stop-color="#f6cf96" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#23242b"/>
+      <stop offset="100%" stop-color="#141519"/>
+    </linearGradient>
+  </defs>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow">For founder-led Shopify brands · 7–8 figures</span>
-      <h1>If you had $50,000 to spend on inventory this week, would you know what to buy first?</h1>
-      <p class="sub">Most founders guess. Get the free tool that ranks every order by what it earns — so your cash sits behind what actually makes money.</p>
-    </div>
-    <div class="card" id="formCard">
-      <div id="formView">
-        <h3>Get the free tool</h3>
-        <p class="sub">The spreadsheet + a 5-min walkthrough. Emailed to you instantly.</p>
-        <form id="leadForm" novalidate>
-          <div class="hp" aria-hidden="true"><label>Company fax</label><input type="text" name="company_fax" tabindex="-1" autocomplete="off" /></div>
-          <div class="field"><label for="name">Name</label><input type="text" id="name" name="name" autocomplete="name" required /></div>
-          <div class="field"><label for="email">Work email</label><input type="email" id="email" name="email" autocomplete="email" required /></div>
-          <div class="field"><label for="phone">Phone <span class="opt">(optional)</span></label><input type="tel" id="phone" name="phone" autocomplete="tel" /></div>
-          <div class="field"><label for="website">Company website</label><input type="text" id="website" name="website" placeholder="yourbrand.com" required /></div>
-          <div class="field"><label for="role">Your role</label>
-            <select id="role" name="role" required>
-              <option value="" disabled selected>Select one…</option>
-              <option>Founder / CEO</option><option>Owner / Co-founder</option><option>Ops / Supply chain</option><option>Finance</option><option>Other</option>
-            </select>
-          </div>
-          <button type="submit" class="btn" id="submitBtn">Get the free tool</button>
-          <div class="err" id="formErr">Please fill in your name, email, website, and role.</div>
-          <p class="trust">Free. No spam. Built by Kyle Kent — the system I run with 8-figure brands.</p>
-        </form>
-      </div>
-      <div class="thanks" id="thanksView">
-        <div class="check">✅</div>
-        <h3>You're in. Here's the tool.</h3>
-        <p class="sub">A copy is in your inbox too. Open it and watch the quick walkthrough.</p>
-        <a href="#" class="btn" id="templateBtn" target="_blank" rel="noopener">Open the tool →</a>
-        <a href="#" class="btn-ghost dark" id="loomBtn" target="_blank" rel="noopener">Watch the walkthrough →</a>
-        <div class="nextstep">
-          <p><strong>Want it run on your numbers?</strong> Book a free 30 minutes — I'll show you where your profit's hiding.</p>
-          <a href="#" class="btn-ghost dark" id="callBtnThanks" target="_blank" rel="noopener">Book a free 30-min call →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
+  <!-- back wall hint -->
+  <rect x="0" y="230" width="1440" height="90" fill="#20232a" opacity=".85"/>
 
-<!-- PROOF -->
-<div class="proof">
-  <div class="wrap">
-    <div class="proof-grid">
-      <div><span class="num">6× the math</span><span class="lab">what software told an 8-figure brand to order. Wrong.</span></div>
-      <div><span class="num">10 years of cover</span><span class="lab">26 styles overstocked while the best seller sold out.</span></div>
-      <div><span class="num">~$1,000 / day</span><span class="lab">one top seller bleeding sales to stockouts.</span></div>
+  <!-- floor -->
+  <rect x="0" y="300" width="1440" height="100" fill="url(#floor)"/>
+
+  <!-- hanging lamps -->
+  <g>
+    <rect x="352" y="96" width="4" height="34" fill="#2b2d35"/>
+    <path d="M336,130 L372,130 L364,144 L344,144 Z" fill="#2b2d35"/>
+    <ellipse cx="354" cy="152" rx="84" ry="30" fill="url(#lampGlow)"/>
+    <rect x="718" y="96" width="4" height="34" fill="#2b2d35"/>
+    <path d="M702,130 L738,130 L730,144 L710,144 Z" fill="#2b2d35"/>
+    <ellipse cx="720" cy="152" rx="84" ry="30" fill="url(#lampGlow)"/>
+    <rect x="1084" y="96" width="4" height="34" fill="#2b2d35"/>
+    <path d="M1068,130 L1104,130 L1096,144 L1076,144 Z" fill="#2b2d35"/>
+    <ellipse cx="1086" cy="152" rx="84" ry="30" fill="url(#lampGlow)"/>
+  </g>
+
+  <!-- racks: 4 bays -->
+  <g>
+    <!-- bay A1 -->
+    <rect x="230" y="168" width="10" height="132" fill="#31343f"/>
+    <rect x="460" y="168" width="10" height="132" fill="#31343f"/>
+    <rect x="230" y="168" width="240" height="8" fill="#31343f"/>
+    <rect x="230" y="212" width="240" height="7" fill="#2b2d35"/>
+    <rect x="230" y="258" width="240" height="7" fill="#2b2d35"/>
+    <rect x="246" y="178" width="50" height="32" rx="2" fill="url(#boxglow)" opacity="0.79"/>
+    <line x1="246" y1="194" x2="296" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="304" y="178" width="50" height="32" rx="2" fill="url(#boxglow)" opacity="0.95"/>
+    <line x1="304" y1="194" x2="354" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="362" y="178" width="50" height="32" rx="2" fill="url(#boxglow)" opacity="0.75"/>
+    <line x1="362" y1="194" x2="412" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="420" y="178" width="32" height="32" rx="2" fill="url(#boxglow)" opacity="0.93"/>
+    <line x1="420" y1="194" x2="452" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="246" y="222" width="42" height="34" rx="2" fill="url(#boxglow)" opacity="0.9"/>
+    <line x1="246" y1="239" x2="288" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="296" y="222" width="42" height="34" rx="2" fill="url(#boxglow)" opacity="0.95"/>
+    <line x1="296" y1="239" x2="338" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="346" y="222" width="50" height="34" rx="2" fill="url(#boxglow)" opacity="0.87"/>
+    <line x1="346" y1="239" x2="396" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="404" y="222" width="42" height="34" rx="2" fill="url(#boxglow)" opacity="0.98"/>
+    <line x1="404" y1="239" x2="446" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="246" y="268" width="34" height="30" rx="2" fill="url(#boxglow)" opacity="0.83"/>
+    <line x1="246" y1="283" x2="280" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="288" y="268" width="50" height="30" rx="2" fill="url(#boxglow)" opacity="0.94"/>
+    <line x1="288" y1="283" x2="338" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="346" y="268" width="34" height="30" rx="2" fill="url(#boxglow)" opacity="0.82"/>
+    <line x1="346" y1="283" x2="380" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="388" y="268" width="50" height="30" rx="2" fill="url(#boxglow)" opacity="0.82"/>
+    <line x1="388" y1="283" x2="438" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="329" y="150" width="42" height="16" rx="3" fill="#20222a" stroke="#3a3d49" stroke-width="1.5"/>
+    <text x="350" y="162" font-family="Inter, sans-serif" font-size="10" letter-spacing="2" fill="#e9e3d8" opacity=".8" text-anchor="middle">A1</text>
+
+    <!-- bay A2 -->
+    <rect x="480" y="168" width="10" height="132" fill="#31343f"/>
+    <rect x="710" y="168" width="10" height="132" fill="#31343f"/>
+    <rect x="480" y="168" width="240" height="8" fill="#31343f"/>
+    <rect x="480" y="212" width="240" height="7" fill="#2b2d35"/>
+    <rect x="480" y="258" width="240" height="7" fill="#2b2d35"/>
+    <rect x="496" y="178" width="42" height="32" rx="2" fill="url(#boxglow)" opacity="0.88"/>
+    <line x1="496" y1="194" x2="538" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="546" y="178" width="50" height="32" rx="2" fill="url(#boxglow)" opacity="0.82"/>
+    <line x1="546" y1="194" x2="596" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="604" y="178" width="50" height="32" rx="2" fill="url(#boxglow)" opacity="0.92"/>
+    <line x1="604" y1="194" x2="654" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="662" y="178" width="34" height="32" rx="2" fill="url(#boxglow)" opacity="0.92"/>
+    <line x1="662" y1="194" x2="696" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="496" y="222" width="50" height="34" rx="2" fill="url(#boxglow)" opacity="0.82"/>
+    <line x1="496" y1="239" x2="546" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="554" y="222" width="34" height="34" rx="2" fill="url(#boxglow)" opacity="0.8"/>
+    <line x1="554" y1="239" x2="588" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="596" y="222" width="34" height="34" rx="2" fill="url(#boxglow)" opacity="0.78"/>
+    <line x1="596" y1="239" x2="630" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="638" y="222" width="42" height="34" rx="2" fill="url(#boxglow)" opacity="0.87"/>
+    <line x1="638" y1="239" x2="680" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="496" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.97"/>
+    <line x1="496" y1="283" x2="538" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="546" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.76"/>
+    <line x1="546" y1="283" x2="588" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="596" y="268" width="34" height="30" rx="2" fill="url(#boxglow)" opacity="0.78"/>
+    <line x1="596" y1="283" x2="630" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="638" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.95"/>
+    <line x1="638" y1="283" x2="680" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="579" y="150" width="42" height="16" rx="3" fill="#20222a" stroke="#3a3d49" stroke-width="1.5"/>
+    <text x="600" y="162" font-family="Inter, sans-serif" font-size="10" letter-spacing="2" fill="#e9e3d8" opacity=".8" text-anchor="middle">A2</text>
+
+    <!-- bay A3 -->
+    <rect x="730" y="168" width="10" height="132" fill="#31343f"/>
+    <rect x="960" y="168" width="10" height="132" fill="#31343f"/>
+    <rect x="730" y="168" width="240" height="8" fill="#31343f"/>
+    <rect x="730" y="212" width="240" height="7" fill="#2b2d35"/>
+    <rect x="730" y="258" width="240" height="7" fill="#2b2d35"/>
+    <rect x="746" y="178" width="42" height="32" rx="2" fill="url(#boxglow)" opacity="0.78"/>
+    <line x1="746" y1="194" x2="788" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="796" y="178" width="42" height="32" rx="2" fill="url(#boxglow)" opacity="0.97"/>
+    <line x1="796" y1="194" x2="838" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="846" y="178" width="50" height="32" rx="2" fill="url(#boxglow)" opacity="0.9"/>
+    <line x1="846" y1="194" x2="896" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="904" y="178" width="34" height="32" rx="2" fill="url(#boxglow)" opacity="0.79"/>
+    <line x1="904" y1="194" x2="938" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="746" y="222" width="42" height="34" rx="2" fill="url(#boxglow)" opacity="0.9"/>
+    <line x1="746" y1="239" x2="788" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="796" y="222" width="50" height="34" rx="2" fill="url(#boxglow)" opacity="0.86"/>
+    <line x1="796" y1="239" x2="846" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="854" y="222" width="50" height="34" rx="2" fill="url(#boxglow)" opacity="0.91"/>
+    <line x1="854" y1="239" x2="904" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="912" y="222" width="34" height="34" rx="2" fill="url(#boxglow)" opacity="0.77"/>
+    <line x1="912" y1="239" x2="946" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="746" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.78"/>
+    <line x1="746" y1="283" x2="788" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="796" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.86"/>
+    <line x1="796" y1="283" x2="838" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="846" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.86"/>
+    <line x1="846" y1="283" x2="888" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="896" y="268" width="50" height="30" rx="2" fill="url(#boxglow)" opacity="0.94"/>
+    <line x1="896" y1="283" x2="946" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="829" y="150" width="42" height="16" rx="3" fill="#20222a" stroke="#3a3d49" stroke-width="1.5"/>
+    <text x="850" y="162" font-family="Inter, sans-serif" font-size="10" letter-spacing="2" fill="#e9e3d8" opacity=".8" text-anchor="middle">A3</text>
+
+    <!-- bay A4 -->
+    <rect x="980" y="168" width="10" height="132" fill="#31343f"/>
+    <rect x="1210" y="168" width="10" height="132" fill="#31343f"/>
+    <rect x="980" y="168" width="240" height="8" fill="#31343f"/>
+    <rect x="980" y="212" width="240" height="7" fill="#2b2d35"/>
+    <rect x="980" y="258" width="240" height="7" fill="#2b2d35"/>
+    <rect x="996" y="178" width="42" height="32" rx="2" fill="url(#boxglow)" opacity="0.82"/>
+    <line x1="996" y1="194" x2="1038" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="1046" y="178" width="34" height="32" rx="2" fill="url(#boxglow)" opacity="0.94"/>
+    <line x1="1046" y1="194" x2="1080" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="1088" y="178" width="42" height="32" rx="2" fill="url(#boxglow)" opacity="0.82"/>
+    <line x1="1088" y1="194" x2="1130" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="1138" y="178" width="42" height="32" rx="2" fill="url(#boxglow)" opacity="0.82"/>
+    <line x1="1138" y1="194" x2="1180" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="996" y="222" width="42" height="34" rx="2" fill="url(#boxglow)" opacity="0.78"/>
+    <line x1="996" y1="239" x2="1038" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="1046" y="222" width="50" height="34" rx="2" fill="url(#boxglow)" opacity="0.79"/>
+    <line x1="1046" y1="239" x2="1096" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="1104" y="222" width="50" height="34" rx="2" fill="url(#boxglow)" opacity="0.79"/>
+    <line x1="1104" y1="239" x2="1154" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="1162" y="222" width="34" height="34" rx="2" fill="url(#boxglow)" opacity="0.91"/>
+    <line x1="1162" y1="239" x2="1196" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="996" y="268" width="50" height="30" rx="2" fill="url(#boxglow)" opacity="0.87"/>
+    <line x1="996" y1="283" x2="1046" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="1054" y="268" width="34" height="30" rx="2" fill="url(#boxglow)" opacity="0.89"/>
+    <line x1="1054" y1="283" x2="1088" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="1096" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.95"/>
+    <line x1="1096" y1="283" x2="1138" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="1146" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.8"/>
+    <line x1="1146" y1="283" x2="1188" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
+    <rect x="1079" y="150" width="42" height="16" rx="3" fill="#20222a" stroke="#3a3d49" stroke-width="1.5"/>
+    <text x="1100" y="162" font-family="Inter, sans-serif" font-size="10" letter-spacing="2" fill="#e9e3d8" opacity=".8" text-anchor="middle">A4</text>
+  </g>
+
+  <!-- hanging SHIPPING sign -->
+  <g>
+    <rect x="92" y="120" width="12" height="180" fill="#2b2d35"/>
+    <rect x="40" y="150" width="116" height="46" rx="8" fill="#20222a" stroke="#3a3d49" stroke-width="2"/>
+    <g font-family="Inter, sans-serif" text-anchor="middle" fill="#e9e3d8">
+      <text x="98" y="170" font-size="11" letter-spacing="2" opacity=".9" font-weight="500">SHIPPING</text>
+      <text x="98" y="186" font-size="12" letter-spacing="1" opacity=".65">&#8594;</text>
+    </g>
+  </g>
+
+  <!-- pallet + boxes on floor right -->
+  <g>
+    <rect x="1270" y="286" width="110" height="12" fill="#2b2d35"/>
+    <rect x="1284" y="252" width="38" height="34" rx="2" fill="url(#boxglow)" opacity=".9"/>
+    <rect x="1326" y="252" width="34" height="34" rx="2" fill="url(#boxglow)" opacity=".8"/>
+    <rect x="1300" y="218" width="40" height="34" rx="2" fill="url(#boxglow)" opacity=".95"/>
+  </g>
+
+  <!-- floor safety stripes -->
+  <g stroke="#c9cdd8" stroke-width="4" opacity=".12" stroke-linecap="round">
+    <path d="M200,392 L226,344"/>
+    <path d="M420,392 L446,344"/>
+    <path d="M640,392 L666,344"/>
+    <path d="M860,392 L886,344"/>
+    <path d="M1080,392 L1106,344"/>
+  </g>
+
+  <!-- warm light spill under racks -->
+  <g opacity=".08" fill="#f6cf96">
+    <ellipse cx="350" cy="312" rx="150" ry="14"/>
+    <ellipse cx="600" cy="312" rx="150" ry="14"/>
+    <ellipse cx="850" cy="312" rx="150" ry="14"/>
+    <ellipse cx="1100" cy="312" rx="150" ry="14"/>
+  </g>
+</svg>
+</div>
+<div class="grain"></div>
+
+<div class="shell">
+  <header class="hero wrap">
+    <a class="brand" href="https://doctordigits.com" aria-label="DrDigits">DrDigits</a>
+    <h1>Radically simple<br>inventory buying</h1>
+    <p class="tagline">(open-to-buy for Shopify brands)</p>
+    <p class="sub">If you had $50,000 to spend on inventory this week, would you know what to buy first? One 8-figure brand’s software said order <b>6× the math</b><span class="sup">1</span> — while their best seller bled <b>~$1,000 a day</b> to stockouts.</p>
+
+    <div class="ctarow" id="ctaRow">
+      <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0"><label>Company fax</label><input type="text" id="company_fax" tabindex="-1" autocomplete="off" /></div>
+      <div class="emailwrap">
+        <input type="email" id="email" placeholder="Enter your email" />
+        <button class="btn" id="submitBtn" onclick="submitEmail()">Get the free tool</button>
+      </div>
+      <a href="#" class="btn-ghost" id="callBtn" target="_blank" rel="noopener">Book a free 30-min call</a>
     </div>
-    <div class="tag">Real findings. Anonymized.</div>
+    <div class="thanks" id="thanks">
+      <p>✅ You're in — the free tool is on its way to your inbox.</p>
+      <p class="note">Two Shopify exports in, one ranked buy list out — the walkthrough link is in the email.</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap">
+        <a href="#" class="btn" id="templateBtn" target="_blank" rel="noopener">Open the tool</a>
+        <a href="#" class="btn-ghost" id="callBtnThanks" target="_blank" rel="noopener">Book a free 30-min call</a>
+      </div>
+    </div>
+
+    <div class="proof">
+      <div class="chip"><span class="n">6× the math</span><span class="l">what software told an 8-figure brand to order</span></div>
+      <div class="chip"><span class="n">10 years of cover</span><span class="l">26 styles overstocked while the best seller sold out</span></div>
+      <div class="chip"><span class="n">~$1,000/day</span><span class="l">one top seller bleeding sales to stockouts</span></div>
+    </div>
+  </header>
+
+  <div class="discbar wrap">
+    <span class="sup">1</span> Real, anonymized client findings — not a guarantee of your results. Not financial advice.
   </div>
 </div>
 
-<!-- TOOL -->
-<section>
-  <div class="wrap" style="text-align:center">
-    <span class="eyebrow" style="color:var(--gold-dark)">The free tool</span>
-    <h2>Your numbers in. One decision out.</h2>
-    <div class="steps">
-      <div class="step"><span class="n">1</span><p>Drop in your Shopify numbers</p></div>
-      <div class="step"><span class="n">2</span><p>Get one ranked buy list</p></div>
-      <div class="step"><span class="n">3</span><p>Order the winners, skip the rest</p></div>
-    </div>
-    <p style="color:var(--muted);margin-top:22px">What to order first, what waits, and where your cash is frozen. Every number checkable by hand.</p>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="finalcta">
-  <div class="wrap">
-    <h2>More profit. More cash in the bank.</h2>
-    <p>Inventory's just the start. Grab the free tool — or book a free 30 minutes.</p>
-    <div class="cta-row">
-      <a href="#formCard" class="btn" id="ctaBtn">Get the free tool</a>
-      <a href="#" class="btn-ghost" id="callBtnMain" target="_blank" rel="noopener">Book a free 30-min call</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <p>&copy; <span id="yr"></span> Kyle Kent. Plain math. Bottom-line results.</p>
-    <p class="disc">Figures shown are real, anonymized client findings and are not a guarantee of your results.</p>
-  </div>
-</footer>
-
 <script>
-/* ===== CONFIG — paste your values (see deploy brief) ===== */
-const APPS_SCRIPT_URL       = "https://script.google.com/macros/s/AKfycbyu_Qr8zyI25IgiMPWnnezy4kVlE1VzgEoW_kC57l3Ocbg6ncuFiU-Y_4XZ84IFW71g/exec";
-const TEMPLATE_COPY_LINK    = "https://docs.google.com/spreadsheets/d/1oxCxESKJMHl8yIeNMSbiQORFqOX1-SAEQGVEpplB3zM/edit?gid=2101435707#gid=2101435707";
-const LOOM_WALKTHROUGH_LINK = "https://www.loom.com/share/19f08821022946e3a2ab55cc545a3a96";
-const CALENDLY_LINK         = "https://calendly.com/kyle-doctordigits/new-meeting";
-/* ========================================================= */
-document.getElementById('yr').textContent = new Date().getFullYear();
-document.getElementById('templateBtn').href  = TEMPLATE_COPY_LINK;
-document.getElementById('loomBtn').href       = LOOM_WALKTHROUGH_LINK;
+/* ===== CONFIG ===== */
+const APPS_SCRIPT_URL    = "https://script.google.com/macros/s/AKfycbyu_Qr8zyI25IgiMPWnnezy4kVlE1VzgEoW_kC57l3Ocbg6ncuFiU-Y_4XZ84IFW71g/exec";
+const TEMPLATE_COPY_LINK = "https://docs.google.com/spreadsheets/d/1oxCxESKJMHl8yIeNMSbiQORFqOX1-SAEQGVEpplB3zM/copy";
+const CALENDLY_LINK      = "https://calendly.com/kyle-doctordigits/30min";
+/* ================== */
+document.getElementById('templateBtn').href   = TEMPLATE_COPY_LINK;
+document.getElementById('callBtn').href       = CALENDLY_LINK;
 document.getElementById('callBtnThanks').href = CALENDLY_LINK;
-document.getElementById('callBtnMain').href   = CALENDLY_LINK;
 
 function getVisitorId(){
   try{ let id=localStorage.getItem('drd_vid'); const ret=!!id;
@@ -195,7 +361,7 @@ function getVisitorId(){
 }
 const VISITOR=getVisitorId();
 function getParams(){ const p=new URLSearchParams(location.search); return {
-  utm_source:p.get('utm_source')||'',utm_medium:p.get('utm_medium')||'',utm_campaign:p.get('utm_campaign')||'',
+  utm_source:p.get('utm_source')||'',utm_medium:p.get('utm_medium')||'',utm_campaign:p.get('utm_campaign')||'toc',
   utm_content:p.get('utm_content')||'',utm_term:p.get('utm_term')||'',referrer:document.referrer||'direct'}; }
 const PARAMS=getParams();
 const ENV={page:location.pathname+location.search,screen:(window.screen?screen.width+'x'+screen.height:''),
@@ -205,27 +371,27 @@ function send(payload){ const body=JSON.stringify(payload);
   if(!APPS_SCRIPT_URL||APPS_SCRIPT_URL.indexOf('PASTE_')===0) return;
   try{ const b=new Blob([body],{type:'text/plain;charset=UTF-8'}); if(navigator.sendBeacon&&navigator.sendBeacon(APPS_SCRIPT_URL,b)) return; }catch(e){}
   try{ fetch(APPS_SCRIPT_URL,{method:'POST',mode:'no-cors',body,keepalive:true}); }catch(e){} }
-const START=Date.now(); let maxScroll=0,reachedForm=false,submitted=false;
+const START=Date.now(); let maxScroll=0,reachedForm=true,submitted=false;
 send(Object.assign({type:'visit',visitorId:VISITOR.id,returning:VISITOR.ret},PARAMS,ENV));
 window.addEventListener('scroll',function(){ const h=document.documentElement;
   const pct=Math.round(((h.scrollTop||document.body.scrollTop)+window.innerHeight)/h.scrollHeight*100);
   if(pct>maxScroll) maxScroll=Math.min(100,pct); },{passive:true});
-var fc=document.getElementById('formCard');
-if('IntersectionObserver' in window){ new IntersectionObserver(function(es){es.forEach(e=>{if(e.isIntersecting)reachedForm=true;});},{threshold:.4}).observe(fc); }
 function sendEngagement(){ send({type:'engagement',visitorId:VISITOR.id,timeOnPageSec:Math.round((Date.now()-START)/1000),scrollDepthPct:maxScroll,reachedForm:reachedForm,submitted:submitted}); }
 window.addEventListener('pagehide',sendEngagement);
 document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden') sendEngagement(); });
-var form=document.getElementById('leadForm'),errBox=document.getElementById('formErr'),submitBtn=document.getElementById('submitBtn');
-form.addEventListener('submit',function(ev){ ev.preventDefault(); errBox.style.display='none';
-  if(form.company_fax.value.trim()!==''){return;} if(Date.now()-START<2000){return;}
-  var name=form.name.value.trim(),email=form.email.value.trim(),website=form.website.value.trim(),role=form.role.value.trim(),phone=form.phone.value.trim();
-  var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  if(!name||!email||!website||!role||!ok){ errBox.textContent=(!ok&&email)?'Please enter a valid email address.':'Please fill in your name, email, website, and role.'; errBox.style.display='block'; return; }
-  submitBtn.disabled=true; submitBtn.textContent='Sending…'; submitted=true;
-  send(Object.assign({type:'lead',visitorId:VISITOR.id,name,email,phone,website,role},PARAMS,{timezone:ENV.timezone,userAgent:ENV.userAgent,referrer:PARAMS.referrer}));
-  setTimeout(function(){ document.getElementById('formView').style.display='none'; document.getElementById('thanksView').style.display='block'; },400);
-});
-document.getElementById('ctaBtn').addEventListener('click',function(e){ e.preventDefault(); document.getElementById('name').scrollIntoView({behavior:'smooth',block:'center'}); document.getElementById('name').focus(); });
+
+function submitEmail(){
+  var input=document.getElementById('email'), btn=document.getElementById('submitBtn');
+  var v=input.value.trim();
+  var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  if(!ok){ input.placeholder='Enter a valid email'; input.value=''; return; }
+  if(document.getElementById('company_fax').value.trim()!==''){ return; }
+  if(Date.now()-START<2000){ return; }
+  btn.disabled=true; btn.textContent='Sending…'; submitted=true;
+  send(Object.assign({type:'lead',visitorId:VISITOR.id,name:'',email:v,phone:'',website:'',role:''},PARAMS,{timezone:ENV.timezone,userAgent:ENV.userAgent,referrer:PARAMS.referrer}));
+  setTimeout(function(){ document.getElementById('ctaRow').style.display='none'; document.getElementById('thanks').style.display='block'; },400);
+}
+document.getElementById('email').addEventListener('keydown',function(e){ if(e.key==='Enter') submitEmail(); });
 </script>
 </body>
 </html>
