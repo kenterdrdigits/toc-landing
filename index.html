@@ -107,7 +107,7 @@
       <stop offset="100%" stop-color="#c9854f" stop-opacity=".85"/>
     </linearGradient>
     <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#f6cf96" stop-opacity=".28"/>
+      <stop offset="0%" stop-color="#f6cf96" stop-opacity=".26"/>
       <stop offset="100%" stop-color="#f6cf96" stop-opacity="0"/>
     </radialGradient>
     <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
@@ -117,192 +117,366 @@
   </defs>
 
   <!-- back wall hint -->
-  <rect x="0" y="230" width="1440" height="90" fill="#20232a" opacity=".85"/>
+  <rect x="0" y="220" width="1440" height="100" fill="#20232a" opacity=".85"/>
 
   <!-- floor -->
   <rect x="0" y="300" width="1440" height="100" fill="url(#floor)"/>
 
-  <!-- hanging lamps -->
+  <!-- high-bay lamps -->
   <g>
-    <rect x="352" y="96" width="4" height="34" fill="#2b2d35"/>
-    <path d="M336,130 L372,130 L364,144 L344,144 Z" fill="#2b2d35"/>
-    <ellipse cx="354" cy="152" rx="84" ry="30" fill="url(#lampGlow)"/>
-    <rect x="718" y="96" width="4" height="34" fill="#2b2d35"/>
-    <path d="M702,130 L738,130 L730,144 L710,144 Z" fill="#2b2d35"/>
-    <ellipse cx="720" cy="152" rx="84" ry="30" fill="url(#lampGlow)"/>
-    <rect x="1084" y="96" width="4" height="34" fill="#2b2d35"/>
-    <path d="M1068,130 L1104,130 L1096,144 L1076,144 Z" fill="#2b2d35"/>
-    <ellipse cx="1086" cy="152" rx="84" ry="30" fill="url(#lampGlow)"/>
+    <rect x="466" y="60" width="4" height="24" fill="#2b2d35"/>
+    <path d="M452,84 L484,84 L477,96 L459,96 Z" fill="#2b2d35"/>
+    <ellipse cx="468" cy="104" rx="80" ry="26" fill="url(#lampGlow)"/>
+    <rect x="970" y="60" width="4" height="24" fill="#2b2d35"/>
+    <path d="M956,84 L988,84 L981,96 L963,96 Z" fill="#2b2d35"/>
+    <ellipse cx="972" cy="104" rx="80" ry="26" fill="url(#lampGlow)"/>
   </g>
 
-  <!-- racks: 4 bays -->
+  <!-- hanging aisle sign -->
   <g>
-    <!-- bay A1 -->
-    <rect x="230" y="168" width="10" height="132" fill="#31343f"/>
-    <rect x="460" y="168" width="10" height="132" fill="#31343f"/>
-    <rect x="230" y="168" width="240" height="8" fill="#31343f"/>
-    <rect x="230" y="212" width="240" height="7" fill="#2b2d35"/>
-    <rect x="230" y="258" width="240" height="7" fill="#2b2d35"/>
-    <rect x="246" y="178" width="50" height="32" rx="2" fill="url(#boxglow)" opacity="0.79"/>
-    <line x1="246" y1="194" x2="296" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="304" y="178" width="50" height="32" rx="2" fill="url(#boxglow)" opacity="0.95"/>
-    <line x1="304" y1="194" x2="354" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="362" y="178" width="50" height="32" rx="2" fill="url(#boxglow)" opacity="0.75"/>
-    <line x1="362" y1="194" x2="412" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="420" y="178" width="32" height="32" rx="2" fill="url(#boxglow)" opacity="0.93"/>
-    <line x1="420" y1="194" x2="452" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="246" y="222" width="42" height="34" rx="2" fill="url(#boxglow)" opacity="0.9"/>
-    <line x1="246" y1="239" x2="288" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="296" y="222" width="42" height="34" rx="2" fill="url(#boxglow)" opacity="0.95"/>
-    <line x1="296" y1="239" x2="338" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="346" y="222" width="50" height="34" rx="2" fill="url(#boxglow)" opacity="0.87"/>
-    <line x1="346" y1="239" x2="396" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="404" y="222" width="42" height="34" rx="2" fill="url(#boxglow)" opacity="0.98"/>
-    <line x1="404" y1="239" x2="446" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="246" y="268" width="34" height="30" rx="2" fill="url(#boxglow)" opacity="0.83"/>
-    <line x1="246" y1="283" x2="280" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="288" y="268" width="50" height="30" rx="2" fill="url(#boxglow)" opacity="0.94"/>
-    <line x1="288" y1="283" x2="338" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="346" y="268" width="34" height="30" rx="2" fill="url(#boxglow)" opacity="0.82"/>
-    <line x1="346" y1="283" x2="380" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="388" y="268" width="50" height="30" rx="2" fill="url(#boxglow)" opacity="0.82"/>
-    <line x1="388" y1="283" x2="438" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="329" y="150" width="42" height="16" rx="3" fill="#20222a" stroke="#3a3d49" stroke-width="1.5"/>
-    <text x="350" y="162" font-family="Inter, sans-serif" font-size="10" letter-spacing="2" fill="#e9e3d8" opacity=".8" text-anchor="middle">A1</text>
-
-    <!-- bay A2 -->
-    <rect x="480" y="168" width="10" height="132" fill="#31343f"/>
-    <rect x="710" y="168" width="10" height="132" fill="#31343f"/>
-    <rect x="480" y="168" width="240" height="8" fill="#31343f"/>
-    <rect x="480" y="212" width="240" height="7" fill="#2b2d35"/>
-    <rect x="480" y="258" width="240" height="7" fill="#2b2d35"/>
-    <rect x="496" y="178" width="42" height="32" rx="2" fill="url(#boxglow)" opacity="0.88"/>
-    <line x1="496" y1="194" x2="538" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="546" y="178" width="50" height="32" rx="2" fill="url(#boxglow)" opacity="0.82"/>
-    <line x1="546" y1="194" x2="596" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="604" y="178" width="50" height="32" rx="2" fill="url(#boxglow)" opacity="0.92"/>
-    <line x1="604" y1="194" x2="654" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="662" y="178" width="34" height="32" rx="2" fill="url(#boxglow)" opacity="0.92"/>
-    <line x1="662" y1="194" x2="696" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="496" y="222" width="50" height="34" rx="2" fill="url(#boxglow)" opacity="0.82"/>
-    <line x1="496" y1="239" x2="546" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="554" y="222" width="34" height="34" rx="2" fill="url(#boxglow)" opacity="0.8"/>
-    <line x1="554" y1="239" x2="588" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="596" y="222" width="34" height="34" rx="2" fill="url(#boxglow)" opacity="0.78"/>
-    <line x1="596" y1="239" x2="630" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="638" y="222" width="42" height="34" rx="2" fill="url(#boxglow)" opacity="0.87"/>
-    <line x1="638" y1="239" x2="680" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="496" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.97"/>
-    <line x1="496" y1="283" x2="538" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="546" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.76"/>
-    <line x1="546" y1="283" x2="588" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="596" y="268" width="34" height="30" rx="2" fill="url(#boxglow)" opacity="0.78"/>
-    <line x1="596" y1="283" x2="630" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="638" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.95"/>
-    <line x1="638" y1="283" x2="680" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="579" y="150" width="42" height="16" rx="3" fill="#20222a" stroke="#3a3d49" stroke-width="1.5"/>
-    <text x="600" y="162" font-family="Inter, sans-serif" font-size="10" letter-spacing="2" fill="#e9e3d8" opacity=".8" text-anchor="middle">A2</text>
-
-    <!-- bay A3 -->
-    <rect x="730" y="168" width="10" height="132" fill="#31343f"/>
-    <rect x="960" y="168" width="10" height="132" fill="#31343f"/>
-    <rect x="730" y="168" width="240" height="8" fill="#31343f"/>
-    <rect x="730" y="212" width="240" height="7" fill="#2b2d35"/>
-    <rect x="730" y="258" width="240" height="7" fill="#2b2d35"/>
-    <rect x="746" y="178" width="42" height="32" rx="2" fill="url(#boxglow)" opacity="0.78"/>
-    <line x1="746" y1="194" x2="788" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="796" y="178" width="42" height="32" rx="2" fill="url(#boxglow)" opacity="0.97"/>
-    <line x1="796" y1="194" x2="838" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="846" y="178" width="50" height="32" rx="2" fill="url(#boxglow)" opacity="0.9"/>
-    <line x1="846" y1="194" x2="896" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="904" y="178" width="34" height="32" rx="2" fill="url(#boxglow)" opacity="0.79"/>
-    <line x1="904" y1="194" x2="938" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="746" y="222" width="42" height="34" rx="2" fill="url(#boxglow)" opacity="0.9"/>
-    <line x1="746" y1="239" x2="788" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="796" y="222" width="50" height="34" rx="2" fill="url(#boxglow)" opacity="0.86"/>
-    <line x1="796" y1="239" x2="846" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="854" y="222" width="50" height="34" rx="2" fill="url(#boxglow)" opacity="0.91"/>
-    <line x1="854" y1="239" x2="904" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="912" y="222" width="34" height="34" rx="2" fill="url(#boxglow)" opacity="0.77"/>
-    <line x1="912" y1="239" x2="946" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="746" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.78"/>
-    <line x1="746" y1="283" x2="788" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="796" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.86"/>
-    <line x1="796" y1="283" x2="838" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="846" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.86"/>
-    <line x1="846" y1="283" x2="888" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="896" y="268" width="50" height="30" rx="2" fill="url(#boxglow)" opacity="0.94"/>
-    <line x1="896" y1="283" x2="946" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="829" y="150" width="42" height="16" rx="3" fill="#20222a" stroke="#3a3d49" stroke-width="1.5"/>
-    <text x="850" y="162" font-family="Inter, sans-serif" font-size="10" letter-spacing="2" fill="#e9e3d8" opacity=".8" text-anchor="middle">A3</text>
-
-    <!-- bay A4 -->
-    <rect x="980" y="168" width="10" height="132" fill="#31343f"/>
-    <rect x="1210" y="168" width="10" height="132" fill="#31343f"/>
-    <rect x="980" y="168" width="240" height="8" fill="#31343f"/>
-    <rect x="980" y="212" width="240" height="7" fill="#2b2d35"/>
-    <rect x="980" y="258" width="240" height="7" fill="#2b2d35"/>
-    <rect x="996" y="178" width="42" height="32" rx="2" fill="url(#boxglow)" opacity="0.82"/>
-    <line x1="996" y1="194" x2="1038" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="1046" y="178" width="34" height="32" rx="2" fill="url(#boxglow)" opacity="0.94"/>
-    <line x1="1046" y1="194" x2="1080" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="1088" y="178" width="42" height="32" rx="2" fill="url(#boxglow)" opacity="0.82"/>
-    <line x1="1088" y1="194" x2="1130" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="1138" y="178" width="42" height="32" rx="2" fill="url(#boxglow)" opacity="0.82"/>
-    <line x1="1138" y1="194" x2="1180" y2="194" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="996" y="222" width="42" height="34" rx="2" fill="url(#boxglow)" opacity="0.78"/>
-    <line x1="996" y1="239" x2="1038" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="1046" y="222" width="50" height="34" rx="2" fill="url(#boxglow)" opacity="0.79"/>
-    <line x1="1046" y1="239" x2="1096" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="1104" y="222" width="50" height="34" rx="2" fill="url(#boxglow)" opacity="0.79"/>
-    <line x1="1104" y1="239" x2="1154" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="1162" y="222" width="34" height="34" rx="2" fill="url(#boxglow)" opacity="0.91"/>
-    <line x1="1162" y1="239" x2="1196" y2="239" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="996" y="268" width="50" height="30" rx="2" fill="url(#boxglow)" opacity="0.87"/>
-    <line x1="996" y1="283" x2="1046" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="1054" y="268" width="34" height="30" rx="2" fill="url(#boxglow)" opacity="0.89"/>
-    <line x1="1054" y1="283" x2="1088" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="1096" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.95"/>
-    <line x1="1096" y1="283" x2="1138" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="1146" y="268" width="42" height="30" rx="2" fill="url(#boxglow)" opacity="0.8"/>
-    <line x1="1146" y1="283" x2="1188" y2="283" stroke="#1b1d24" stroke-width="2" opacity=".5"/>
-    <rect x="1079" y="150" width="42" height="16" rx="3" fill="#20222a" stroke="#3a3d49" stroke-width="1.5"/>
-    <text x="1100" y="162" font-family="Inter, sans-serif" font-size="10" letter-spacing="2" fill="#e9e3d8" opacity=".8" text-anchor="middle">A4</text>
-  </g>
-
-  <!-- hanging SHIPPING sign -->
-  <g>
-    <rect x="92" y="120" width="12" height="180" fill="#2b2d35"/>
-    <rect x="40" y="150" width="116" height="46" rx="8" fill="#20222a" stroke="#3a3d49" stroke-width="2"/>
-    <g font-family="Inter, sans-serif" text-anchor="middle" fill="#e9e3d8">
-      <text x="98" y="170" font-size="11" letter-spacing="2" opacity=".9" font-weight="500">SHIPPING</text>
-      <text x="98" y="186" font-size="12" letter-spacing="1" opacity=".65">&#8594;</text>
+    <rect x="112" y="52" width="3" height="34" fill="#2b2d35"/>
+    <rect x="152" y="52" width="3" height="34" fill="#2b2d35"/>
+    <rect x="84" y="86" width="100" height="66" rx="6" fill="#b05e33"/>
+    <rect x="84" y="86" width="100" height="66" rx="6" fill="none" stroke="#7d3f20" stroke-width="2"/>
+    <g font-family="Inter, sans-serif" text-anchor="middle" fill="#f7ecdc">
+      <text x="134" y="108" font-size="12" letter-spacing="3" font-weight="500">AISLE</text>
+      <text x="134" y="142" font-size="30" font-weight="600">7</text>
     </g>
   </g>
 
-  <!-- pallet + boxes on floor right -->
+  <!-- rack bay 1 -->
   <g>
-    <rect x="1270" y="286" width="110" height="12" fill="#2b2d35"/>
-    <rect x="1284" y="252" width="38" height="34" rx="2" fill="url(#boxglow)" opacity=".9"/>
-    <rect x="1326" y="252" width="34" height="34" rx="2" fill="url(#boxglow)" opacity=".8"/>
-    <rect x="1300" y="218" width="40" height="34" rx="2" fill="url(#boxglow)" opacity=".95"/>
+    <rect x="220" y="84" width="11" height="216" fill="#343945"/>
+    <rect x="570" y="84" width="11" height="216" fill="#343945"/>
+    <line x1="231" y1="120" x2="569" y2="84" stroke="#343945" stroke-width="3" opacity=".35"/>
+    <rect x="220" y="150" width="361" height="9" fill="#b05e33"/>
+    <rect x="220" y="159" width="361" height="2.5" fill="#7d3f20"/>
+    <rect x="220" y="232" width="361" height="9" fill="#b05e33"/>
+    <rect x="220" y="241" width="361" height="2.5" fill="#7d3f20"/>
+    <rect x="244" y="140" width="118" height="10" fill="#6b5138"/>
+    <rect x="252" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="296" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="340" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="246" y="116" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.92"/>
+    <line x1="266" y1="116" x2="266" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="290" y="116" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
+    <line x1="310" y1="116" x2="310" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="334" y="116" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.85"/>
+    <line x1="345" y1="116" x2="345" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="246" y="92" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.97"/>
+    <line x1="266" y1="92" x2="266" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="290" y="92" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.87"/>
+    <line x1="310" y1="92" x2="310" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="334" y="92" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.85"/>
+    <line x1="345" y1="92" x2="345" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M250,138 L270,94" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="422" y="140" width="118" height="10" fill="#6b5138"/>
+    <rect x="430" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="474" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="518" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="424" y="116" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.79"/>
+    <line x1="449" y1="116" x2="449" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="478" y="116" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
+    <line x1="498" y1="116" x2="498" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="424" y="92" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
+    <line x1="449" y1="92" x2="449" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="478" y="92" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
+    <line x1="503" y1="92" x2="503" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M428,138 L448,94" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="244" y="222" width="118" height="10" fill="#6b5138"/>
+    <rect x="252" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="296" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="340" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="246" y="198" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.87"/>
+    <line x1="261" y1="198" x2="261" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="280" y="198" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.79"/>
+    <line x1="295" y1="198" x2="295" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="314" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.92"/>
+    <line x1="334" y1="198" x2="334" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="246" y="174" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
+    <line x1="266" y1="174" x2="266" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="290" y="174" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.74"/>
+    <line x1="305" y1="174" x2="305" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="324" y="174" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.95"/>
+    <line x1="339" y1="174" x2="339" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M250,220 L270,176" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="422" y="222" width="118" height="10" fill="#6b5138"/>
+    <rect x="430" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="474" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="518" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="424" y="198" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
+    <line x1="449" y1="198" x2="449" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="478" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.92"/>
+    <line x1="498" y1="198" x2="498" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="424" y="174" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.72"/>
+    <line x1="439" y1="174" x2="439" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="458" y="174" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.87"/>
+    <line x1="483" y1="174" x2="483" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="512" y="174" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.82"/>
+    <line x1="523" y1="174" x2="523" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M428,220 L448,176" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="244" y="290" width="118" height="10" fill="#6b5138"/>
+    <rect x="252" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="296" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="340" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="246" y="266" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.74"/>
+    <line x1="261" y1="266" x2="261" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="280" y="266" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.94"/>
+    <line x1="300" y1="266" x2="300" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="324" y="266" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
+    <line x1="340" y1="266" x2="340" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="246" y="242" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.79"/>
+    <line x1="266" y1="242" x2="266" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="290" y="242" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.88"/>
+    <line x1="305" y1="242" x2="305" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="324" y="242" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.9"/>
+    <line x1="340" y1="242" x2="340" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M250,288 L270,244" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="422" y="290" width="118" height="10" fill="#6b5138"/>
+    <rect x="430" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="474" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="518" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="424" y="266" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.97"/>
+    <line x1="444" y1="266" x2="444" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="468" y="266" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
+    <line x1="488" y1="266" x2="488" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="512" y="266" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
+    <line x1="523" y1="266" x2="523" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="424" y="242" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.82"/>
+    <line x1="439" y1="242" x2="439" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="458" y="242" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.96"/>
+    <line x1="473" y1="242" x2="473" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="492" y="242" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
+    <line x1="507" y1="242" x2="507" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M428,288 L448,244" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="378" y="128" width="52" height="15" rx="2.5" fill="#20222a" stroke="#3a3d49" stroke-width="1.4"/>
+    <text x="404" y="139.5" font-family="Inter, sans-serif" font-size="9.5" letter-spacing="2" fill="#e9e3d8" opacity=".85" text-anchor="middle">BAY 1</text>
+  </g>
+
+  <!-- rack bay 2 -->
+  <g>
+    <rect x="600" y="84" width="11" height="216" fill="#343945"/>
+    <rect x="950" y="84" width="11" height="216" fill="#343945"/>
+    <line x1="611" y1="120" x2="949" y2="84" stroke="#343945" stroke-width="3" opacity=".35"/>
+    <rect x="600" y="150" width="361" height="9" fill="#b05e33"/>
+    <rect x="600" y="159" width="361" height="2.5" fill="#7d3f20"/>
+    <rect x="600" y="232" width="361" height="9" fill="#b05e33"/>
+    <rect x="600" y="241" width="361" height="2.5" fill="#7d3f20"/>
+    <rect x="624" y="140" width="118" height="10" fill="#6b5138"/>
+    <rect x="632" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="676" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="720" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="626" y="116" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
+    <line x1="651" y1="116" x2="651" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="680" y="116" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.87"/>
+    <line x1="700" y1="116" x2="700" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="626" y="92" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.84"/>
+    <line x1="641" y1="92" x2="641" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="660" y="92" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
+    <line x1="680" y1="92" x2="680" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="704" y="92" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
+    <line x1="720" y1="92" x2="720" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M630,138 L650,94" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="802" y="140" width="118" height="10" fill="#6b5138"/>
+    <rect x="810" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="854" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="898" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="804" y="116" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.72"/>
+    <line x1="819" y1="116" x2="819" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="838" y="116" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
+    <line x1="863" y1="116" x2="863" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="892" y="116" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.72"/>
+    <line x1="903" y1="116" x2="903" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="804" y="92" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.76"/>
+    <line x1="829" y1="92" x2="829" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="858" y="92" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.98"/>
+    <line x1="883" y1="92" x2="883" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M808,138 L828,94" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="624" y="222" width="118" height="10" fill="#6b5138"/>
+    <rect x="632" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="676" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="720" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="626" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.95"/>
+    <line x1="646" y1="198" x2="646" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="670" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.84"/>
+    <line x1="690" y1="198" x2="690" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="714" y="198" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.77"/>
+    <line x1="725" y1="198" x2="725" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="626" y="174" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.84"/>
+    <line x1="651" y1="174" x2="651" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="680" y="174" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
+    <line x1="705" y1="174" x2="705" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M630,220 L650,176" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="802" y="222" width="118" height="10" fill="#6b5138"/>
+    <rect x="810" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="854" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="898" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="804" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.84"/>
+    <line x1="824" y1="198" x2="824" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="848" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.83"/>
+    <line x1="868" y1="198" x2="868" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="892" y="198" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.72"/>
+    <line x1="903" y1="198" x2="903" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="804" y="174" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.9"/>
+    <line x1="829" y1="174" x2="829" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="858" y="174" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
+    <line x1="873" y1="174" x2="873" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="892" y="174" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.8"/>
+    <line x1="903" y1="174" x2="903" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M808,220 L828,176" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="624" y="290" width="118" height="10" fill="#6b5138"/>
+    <rect x="632" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="676" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="720" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="626" y="266" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.79"/>
+    <line x1="646" y1="266" x2="646" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="670" y="266" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
+    <line x1="695" y1="266" x2="695" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="626" y="242" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.82"/>
+    <line x1="641" y1="242" x2="641" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="660" y="242" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.85"/>
+    <line x1="680" y1="242" x2="680" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="704" y="242" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
+    <line x1="720" y1="242" x2="720" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M630,288 L650,244" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="802" y="290" width="118" height="10" fill="#6b5138"/>
+    <rect x="810" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="854" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="898" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="804" y="266" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.83"/>
+    <line x1="829" y1="266" x2="829" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="858" y="266" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.97"/>
+    <line x1="878" y1="266" x2="878" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="804" y="242" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.77"/>
+    <line x1="824" y1="242" x2="824" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="848" y="242" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.9"/>
+    <line x1="873" y1="242" x2="873" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M808,288 L828,244" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="758" y="128" width="52" height="15" rx="2.5" fill="#20222a" stroke="#3a3d49" stroke-width="1.4"/>
+    <text x="784" y="139.5" font-family="Inter, sans-serif" font-size="9.5" letter-spacing="2" fill="#e9e3d8" opacity=".85" text-anchor="middle">BAY 2</text>
+  </g>
+
+  <!-- rack bay 3 -->
+  <g>
+    <rect x="980" y="84" width="11" height="216" fill="#343945"/>
+    <rect x="1330" y="84" width="11" height="216" fill="#343945"/>
+    <line x1="991" y1="120" x2="1329" y2="84" stroke="#343945" stroke-width="3" opacity=".35"/>
+    <rect x="980" y="150" width="361" height="9" fill="#b05e33"/>
+    <rect x="980" y="159" width="361" height="2.5" fill="#7d3f20"/>
+    <rect x="980" y="232" width="361" height="9" fill="#b05e33"/>
+    <rect x="980" y="241" width="361" height="2.5" fill="#7d3f20"/>
+    <rect x="1004" y="140" width="118" height="10" fill="#6b5138"/>
+    <rect x="1012" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1056" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1100" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1006" y="116" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.9"/>
+    <line x1="1031" y1="116" x2="1031" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1060" y="116" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.79"/>
+    <line x1="1075" y1="116" x2="1075" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1094" y="116" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.94"/>
+    <line x1="1105" y1="116" x2="1105" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1006" y="92" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.95"/>
+    <line x1="1021" y1="92" x2="1021" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1040" y="92" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.96"/>
+    <line x1="1065" y1="92" x2="1065" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1094" y="92" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.83"/>
+    <line x1="1105" y1="92" x2="1105" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M1010,138 L1030,94" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="1182" y="140" width="118" height="10" fill="#6b5138"/>
+    <rect x="1190" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1234" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1278" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1184" y="116" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.92"/>
+    <line x1="1204" y1="116" x2="1204" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1228" y="116" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.78"/>
+    <line x1="1243" y1="116" x2="1243" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1262" y="116" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
+    <line x1="1278" y1="116" x2="1278" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1184" y="92" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.94"/>
+    <line x1="1199" y1="92" x2="1199" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1218" y="92" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
+    <line x1="1238" y1="92" x2="1238" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1262" y="92" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.83"/>
+    <line x1="1278" y1="92" x2="1278" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M1188,138 L1208,94" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="1004" y="222" width="118" height="10" fill="#6b5138"/>
+    <rect x="1012" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1056" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1100" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1006" y="198" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.83"/>
+    <line x1="1021" y1="198" x2="1021" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1040" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
+    <line x1="1060" y1="198" x2="1060" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1084" y="198" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.94"/>
+    <line x1="1100" y1="198" x2="1100" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1006" y="174" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
+    <line x1="1026" y1="174" x2="1026" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1050" y="174" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.77"/>
+    <line x1="1075" y1="174" x2="1075" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M1010,220 L1030,176" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="1182" y="222" width="118" height="10" fill="#6b5138"/>
+    <rect x="1190" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1234" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1278" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1184" y="198" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.96"/>
+    <line x1="1209" y1="198" x2="1209" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1238" y="198" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.77"/>
+    <line x1="1263" y1="198" x2="1263" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1184" y="174" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.86"/>
+    <line x1="1209" y1="174" x2="1209" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1238" y="174" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.92"/>
+    <line x1="1253" y1="174" x2="1253" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1272" y="174" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
+    <line x1="1283" y1="174" x2="1283" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M1188,220 L1208,176" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="1004" y="290" width="118" height="10" fill="#6b5138"/>
+    <rect x="1012" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1056" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1100" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1006" y="266" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.78"/>
+    <line x1="1021" y1="266" x2="1021" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1040" y="266" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.98"/>
+    <line x1="1065" y1="266" x2="1065" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1094" y="266" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.9"/>
+    <line x1="1105" y1="266" x2="1105" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1006" y="242" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
+    <line x1="1031" y1="242" x2="1031" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1060" y="242" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
+    <line x1="1080" y1="242" x2="1080" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M1010,288 L1030,244" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="1182" y="290" width="118" height="10" fill="#6b5138"/>
+    <rect x="1190" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1234" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1278" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
+    <rect x="1184" y="266" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.84"/>
+    <line x1="1209" y1="266" x2="1209" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1238" y="266" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.97"/>
+    <line x1="1258" y1="266" x2="1258" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1184" y="242" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.74"/>
+    <line x1="1199" y1="242" x2="1199" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1218" y="242" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
+    <line x1="1238" y1="242" x2="1238" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <rect x="1262" y="242" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.79"/>
+    <line x1="1278" y1="242" x2="1278" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
+    <path d="M1188,288 L1208,244" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
+    <rect x="1138" y="128" width="52" height="15" rx="2.5" fill="#20222a" stroke="#3a3d49" stroke-width="1.4"/>
+    <text x="1164" y="139.5" font-family="Inter, sans-serif" font-size="9.5" letter-spacing="2" fill="#e9e3d8" opacity=".85" text-anchor="middle">BAY 3</text>
   </g>
 
   <!-- floor safety stripes -->
   <g stroke="#c9cdd8" stroke-width="4" opacity=".12" stroke-linecap="round">
-    <path d="M200,392 L226,344"/>
-    <path d="M420,392 L446,344"/>
-    <path d="M640,392 L666,344"/>
-    <path d="M860,392 L886,344"/>
-    <path d="M1080,392 L1106,344"/>
+    <path d="M240,392 L266,344"/>
+    <path d="M480,392 L506,344"/>
+    <path d="M720,392 L746,344"/>
+    <path d="M960,392 L986,344"/>
+    <path d="M1200,392 L1226,344"/>
   </g>
 
   <!-- warm light spill under racks -->
   <g opacity=".08" fill="#f6cf96">
-    <ellipse cx="350" cy="312" rx="150" ry="14"/>
-    <ellipse cx="600" cy="312" rx="150" ry="14"/>
-    <ellipse cx="850" cy="312" rx="150" ry="14"/>
-    <ellipse cx="1100" cy="312" rx="150" ry="14"/>
+    <ellipse cx="400" cy="312" rx="180" ry="14"/>
+    <ellipse cx="780" cy="312" rx="180" ry="14"/>
+    <ellipse cx="1160" cy="312" rx="180" ry="14"/>
   </g>
 </svg>
 </div>
