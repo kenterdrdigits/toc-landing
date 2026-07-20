@@ -3,520 +3,70 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Radically simple inventory buying | Doctor Digits</title>
-<meta name="description" content="Founder-led Shopify brands: the free open-to-buy tool that ranks every inventory order by what it earns — so your cash sits behind what actually sells." />
+<title>Radically simple inventory buying | DrDigits</title>
+<meta name="description" content="Founder-led Shopify brands: paste two exports into a free spreadsheet — in ~15 minutes it ranks every product by return per dollar and tells you what to buy with your budget." />
 <meta property="og:title" content="Radically simple inventory buying" />
-<meta property="og:description" content="One 8-figure brand's software said order 6× the math while the best seller bled ~$1,000/day. Free tool that ranks every order by what it earns." />
+<meta property="og:description" content="Their software said order 6× the math. Their best seller bled ~$1,000 a day to stockouts. Free open-to-buy tool for Shopify brands." />
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --cta:#5266EB; --cta-hover:#3F51D6;
-    --white:#f4f4f6; --dim:#c9cdd8; --dimmer:#9aa0b0;
-    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{
-    font-family:var(--sans);color:var(--white);-webkit-font-smoothing:antialiased;
-    min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;
-    background:
-      radial-gradient(120% 55% at 50% 48%, rgba(232,180,140,.30) 0%, rgba(199,144,132,.15) 30%, rgba(0,0,0,0) 60%),
-      linear-gradient(180deg,
-        #2b3244 0%,
-        #48536e 20%,
-        #7c7e96 36%,
-        #b3907f 47%,
-        #6a6274 58%,
-        #3b3a48 70%,
-        #23242c 84%,
-        #15161c 100%);
-    background-attachment:fixed;
-  }
-  /* retail center scene */
-  .scene{position:fixed;left:0;right:0;bottom:0;z-index:0;pointer-events:none}
-  .scene svg{display:block;width:100%;height:auto;min-width:1100px;margin:0 auto}
-  .grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E")}
-
-  .shell{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh}
-  .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 32px}
-
-  /* BRAND (uploaded DrDigits wordmark, recolored white-on-white) */
-  .brand{font-weight:700;font-size:2rem;letter-spacing:-.03em;color:var(--white);text-decoration:none;
-    margin-bottom:6.5vh;display:inline-block;text-shadow:0 2px 24px rgba(20,25,40,.4)}
-  .brand:hover{opacity:.85}
-  .tagline{margin-top:14px;font-size:.98rem;font-weight:400;letter-spacing:.04em;color:var(--dim);
-    text-shadow:0 1px 20px rgba(20,25,40,.5)}
-  .btn{display:inline-flex;align-items:center;justify-content:center;background:var(--cta);color:#fff;border:none;
-    font-family:var(--sans);font-size:.95rem;font-weight:500;padding:11px 22px;border-radius:24px;cursor:pointer;
-    text-decoration:none;transition:background .15s}
-  .btn:hover{background:var(--cta-hover)}
-
-  /* HERO */
-  .hero{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:5.5vh}
-  h1{font-weight:300;font-size:clamp(2.4rem,5.8vw,4.2rem);letter-spacing:-.015em;line-height:1.05;
-    text-shadow:0 2px 30px rgba(20,25,40,.45)}
-  .sub{margin:26px auto 0;max-width:620px;font-weight:400;font-size:1.13rem;line-height:1.55;color:var(--dim);
-    text-shadow:0 1px 20px rgba(20,25,40,.5)}
-  .sub b{color:var(--white);font-weight:500}
-  .sup{font-size:.6em;vertical-align:super}
-
-  .ctarow{display:flex;align-items:center;gap:10px;margin-top:36px;flex-wrap:wrap;justify-content:center}
-  .emailwrap{display:flex;align-items:center;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);
-    border-radius:26px;padding:4px 4px 4px 20px;backdrop-filter:blur(8px)}
-  .emailwrap input{background:transparent;border:none;outline:none;color:var(--white);font-family:var(--sans);
-    font-size:.96rem;width:200px;padding:8px 10px 8px 0}
-  .emailwrap input::placeholder{color:rgba(244,244,246,.55)}
-  .emailwrap .btn{white-space:nowrap}
-  .btn-ghost{display:inline-flex;align-items:center;background:rgba(255,255,255,.10);color:var(--white);
-    border:1px solid rgba(255,255,255,.18);font-size:.95rem;font-weight:500;padding:11px 22px;border-radius:26px;
-    cursor:pointer;text-decoration:none;backdrop-filter:blur(8px);transition:background .15s}
-  .btn-ghost:hover{background:rgba(255,255,255,.18)}
-  .thanks{display:none;margin-top:36px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);
-    border-radius:16px;padding:18px 28px;backdrop-filter:blur(8px);max-width:520px}
-  .thanks p{font-size:.98rem;color:var(--white)}
-  .thanks .note{font-size:.8rem;color:var(--dimmer);margin-top:6px}
-
-  /* proof strip */
-  .proof{display:flex;gap:14px;margin-top:6vh;flex-wrap:wrap;justify-content:center}
-  .chip{background:rgba(14,16,22,.42);border:1px solid rgba(255,255,255,.13);border-radius:14px;
-    padding:14px 22px;backdrop-filter:blur(10px);min-width:200px}
-  .chip .n{display:block;font-weight:500;font-size:1.25rem;letter-spacing:-.01em}
-  .chip .l{display:block;font-size:.8rem;color:var(--dim);margin-top:3px}
-
-  /* footer disclaimer pill */
-  .discbar{margin:auto auto 24px;margin-top:8vh;max-width:860px;background:rgba(8,9,12,.68);
-    border-radius:10px;padding:10px 22px;font-size:.78rem;color:var(--dim);text-align:center;backdrop-filter:blur(8px)}
-
-  @media (max-width:760px){
-    .navlinks{display:none}
-    .hero{padding-top:6vh}
-    .emailwrap input{width:140px}
+  body{margin:0}
+  .scp0:hover{opacity:.85}
+  .scp1:hover{opacity:.7}
+  #callBtn:active{transform:translateY(1px)}
+  @media (max-width:720px){
+    h1[data-dc-tpl="13"]{font-size:42px !important}
+    div[data-dc-tpl="10"]{padding:44px 24px 40px !important}
+    p[data-dc-tpl="15"]{font-size:20px !important}
   }
 </style>
 </head>
 <body>
-<div class="scene">
-<svg viewBox="0 0 1440 400" preserveAspectRatio="xMidYMax slice">
-  <defs>
-    <linearGradient id="boxglow" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f6cf96" stop-opacity=".95"/>
-      <stop offset="100%" stop-color="#c9854f" stop-opacity=".85"/>
-    </linearGradient>
-    <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#f6cf96" stop-opacity=".26"/>
-      <stop offset="100%" stop-color="#f6cf96" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#23242b"/>
-      <stop offset="100%" stop-color="#141519"/>
-    </linearGradient>
-  </defs>
 
-  <!-- back wall hint -->
-  <rect x="0" y="220" width="1440" height="100" fill="#20232a" opacity=".85"/>
+<div id="dc-root"><div class="sc-host" data-sc-name="toc_kyle_edit"><div data-dc-tpl="8" style="min-height: 100vh; background: rgb(242, 241, 236); font-family: &quot;IBM Plex Sans&quot;, -apple-system, sans-serif; color: rgb(10, 10, 10); display: flex; align-items: center; justify-content: center; padding: 48px 20px;">
+  <div data-dc-tpl="9" style="width: 900px; max-width: 100%; background: rgb(255, 255, 255); border: 1px solid rgb(228, 226, 220); box-shadow: rgb(228, 226, 220) 0px 1px 0px, rgba(0, 0, 0, 0.35) 0px 24px 60px -40px;">
+    <div data-dc-tpl="10" style="padding: 60px 80px 52px; text-align: center;">
+      <div data-dc-tpl="11" style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 11px; letter-spacing: 0.26em; color: rgb(138, 135, 127); text-transform: uppercase; margin-bottom: 34px;"><a data-dc-tpl="12" href="https://doctordigits.com" style="text-decoration: none; color: inherit;">DrDigits</a> · Open-to-buy for Shopify</div>
 
-  <!-- floor -->
-  <rect x="0" y="300" width="1440" height="100" fill="url(#floor)"/>
+      <h1 data-dc-tpl="13" style="font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 64px; line-height: 1; letter-spacing: -0.025em; margin: 0px auto 26px; max-width: 14ch;">Radically simple <span data-dc-tpl="14" style="background-image: linear-gradient(transparent 56%, rgb(126, 249, 143) 56%); padding: 0px 0.04em;">inventory buying</span></h1>
 
-  <!-- high-bay lamps -->
-  <g>
-    <rect x="466" y="60" width="4" height="24" fill="#2b2d35"/>
-    <path d="M452,84 L484,84 L477,96 L459,96 Z" fill="#2b2d35"/>
-    <ellipse cx="468" cy="104" rx="80" ry="26" fill="url(#lampGlow)"/>
-    <rect x="970" y="60" width="4" height="24" fill="#2b2d35"/>
-    <path d="M956,84 L988,84 L981,96 L963,96 Z" fill="#2b2d35"/>
-    <ellipse cx="972" cy="104" rx="80" ry="26" fill="url(#lampGlow)"/>
-  </g>
+      <p data-dc-tpl="15" style="font-family: Newsreader, serif; font-style: italic; font-size: 24px; color: rgb(74, 74, 74); margin: 0px auto 40px; max-width: 34ch; line-height: 1.35;">Their software said order 6× the math. Their best seller bled ~$1,000 a day to stockouts.</p>
 
-  <!-- hanging aisle sign -->
-  <g>
-    <rect x="112" y="52" width="3" height="34" fill="#2b2d35"/>
-    <rect x="152" y="52" width="3" height="34" fill="#2b2d35"/>
-    <rect x="84" y="86" width="100" height="66" rx="6" fill="#b05e33"/>
-    <rect x="84" y="86" width="100" height="66" rx="6" fill="none" stroke="#7d3f20" stroke-width="2"/>
-    <g font-family="Inter, sans-serif" text-anchor="middle" fill="#f7ecdc">
-      <text x="134" y="108" font-size="12" letter-spacing="3" font-weight="500">AISLE</text>
-      <text x="134" y="142" font-size="30" font-weight="600">7</text>
-    </g>
-  </g>
+      <p data-dc-tpl="16" style="font-size: 17px; line-height: 1.6; color: rgb(42, 42, 42); margin: 0px auto 40px; max-width: 52ch;">Paste two Shopify exports into a free spreadsheet. In ~15 minutes it ranks every product by return per dollar and tells you exactly what to buy with your budget.</p>
 
-  <!-- rack bay 1 -->
-  <g>
-    <rect x="220" y="84" width="11" height="216" fill="#343945"/>
-    <rect x="570" y="84" width="11" height="216" fill="#343945"/>
-    <line x1="231" y1="120" x2="569" y2="84" stroke="#343945" stroke-width="3" opacity=".35"/>
-    <rect x="220" y="150" width="361" height="9" fill="#b05e33"/>
-    <rect x="220" y="159" width="361" height="2.5" fill="#7d3f20"/>
-    <rect x="220" y="232" width="361" height="9" fill="#b05e33"/>
-    <rect x="220" y="241" width="361" height="2.5" fill="#7d3f20"/>
-    <rect x="244" y="140" width="118" height="10" fill="#6b5138"/>
-    <rect x="252" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="296" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="340" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="246" y="116" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.92"/>
-    <line x1="266" y1="116" x2="266" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="290" y="116" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
-    <line x1="310" y1="116" x2="310" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="334" y="116" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.85"/>
-    <line x1="345" y1="116" x2="345" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="246" y="92" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.97"/>
-    <line x1="266" y1="92" x2="266" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="290" y="92" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.87"/>
-    <line x1="310" y1="92" x2="310" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="334" y="92" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.85"/>
-    <line x1="345" y1="92" x2="345" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M250,138 L270,94" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="422" y="140" width="118" height="10" fill="#6b5138"/>
-    <rect x="430" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="474" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="518" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="424" y="116" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.79"/>
-    <line x1="449" y1="116" x2="449" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="478" y="116" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
-    <line x1="498" y1="116" x2="498" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="424" y="92" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
-    <line x1="449" y1="92" x2="449" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="478" y="92" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
-    <line x1="503" y1="92" x2="503" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M428,138 L448,94" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="244" y="222" width="118" height="10" fill="#6b5138"/>
-    <rect x="252" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="296" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="340" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="246" y="198" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.87"/>
-    <line x1="261" y1="198" x2="261" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="280" y="198" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.79"/>
-    <line x1="295" y1="198" x2="295" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="314" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.92"/>
-    <line x1="334" y1="198" x2="334" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="246" y="174" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
-    <line x1="266" y1="174" x2="266" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="290" y="174" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.74"/>
-    <line x1="305" y1="174" x2="305" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="324" y="174" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.95"/>
-    <line x1="339" y1="174" x2="339" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M250,220 L270,176" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="422" y="222" width="118" height="10" fill="#6b5138"/>
-    <rect x="430" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="474" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="518" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="424" y="198" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
-    <line x1="449" y1="198" x2="449" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="478" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.92"/>
-    <line x1="498" y1="198" x2="498" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="424" y="174" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.72"/>
-    <line x1="439" y1="174" x2="439" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="458" y="174" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.87"/>
-    <line x1="483" y1="174" x2="483" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="512" y="174" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.82"/>
-    <line x1="523" y1="174" x2="523" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M428,220 L448,176" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="244" y="290" width="118" height="10" fill="#6b5138"/>
-    <rect x="252" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="296" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="340" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="246" y="266" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.74"/>
-    <line x1="261" y1="266" x2="261" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="280" y="266" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.94"/>
-    <line x1="300" y1="266" x2="300" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="324" y="266" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
-    <line x1="340" y1="266" x2="340" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="246" y="242" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.79"/>
-    <line x1="266" y1="242" x2="266" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="290" y="242" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.88"/>
-    <line x1="305" y1="242" x2="305" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="324" y="242" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.9"/>
-    <line x1="340" y1="242" x2="340" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M250,288 L270,244" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="422" y="290" width="118" height="10" fill="#6b5138"/>
-    <rect x="430" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="474" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="518" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="424" y="266" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.97"/>
-    <line x1="444" y1="266" x2="444" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="468" y="266" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
-    <line x1="488" y1="266" x2="488" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="512" y="266" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
-    <line x1="523" y1="266" x2="523" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="424" y="242" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.82"/>
-    <line x1="439" y1="242" x2="439" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="458" y="242" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.96"/>
-    <line x1="473" y1="242" x2="473" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="492" y="242" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
-    <line x1="507" y1="242" x2="507" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M428,288 L448,244" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="378" y="128" width="52" height="15" rx="2.5" fill="#20222a" stroke="#3a3d49" stroke-width="1.4"/>
-    <text x="404" y="139.5" font-family="Inter, sans-serif" font-size="9.5" letter-spacing="2" fill="#e9e3d8" opacity=".85" text-anchor="middle">BAY 1</text>
-  </g>
+      <div data-dc-tpl="17" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <a id="callBtn" data-dc-tpl="18" href="#" target="_blank" rel="noopener" class="scp0" style="display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: rgb(10, 10, 10); color: rgb(255, 255, 255); font-size: 18px; font-weight: 600; padding: 20px 40px; text-decoration: none; border-radius: 2px; transition: 0.15s;">Book a free 30-min call →</a>
 
-  <!-- rack bay 2 -->
-  <g>
-    <rect x="600" y="84" width="11" height="216" fill="#343945"/>
-    <rect x="950" y="84" width="11" height="216" fill="#343945"/>
-    <line x1="611" y1="120" x2="949" y2="84" stroke="#343945" stroke-width="3" opacity=".35"/>
-    <rect x="600" y="150" width="361" height="9" fill="#b05e33"/>
-    <rect x="600" y="159" width="361" height="2.5" fill="#7d3f20"/>
-    <rect x="600" y="232" width="361" height="9" fill="#b05e33"/>
-    <rect x="600" y="241" width="361" height="2.5" fill="#7d3f20"/>
-    <rect x="624" y="140" width="118" height="10" fill="#6b5138"/>
-    <rect x="632" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="676" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="720" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="626" y="116" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
-    <line x1="651" y1="116" x2="651" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="680" y="116" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.87"/>
-    <line x1="700" y1="116" x2="700" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="626" y="92" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.84"/>
-    <line x1="641" y1="92" x2="641" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="660" y="92" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
-    <line x1="680" y1="92" x2="680" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="704" y="92" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
-    <line x1="720" y1="92" x2="720" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M630,138 L650,94" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="802" y="140" width="118" height="10" fill="#6b5138"/>
-    <rect x="810" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="854" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="898" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="804" y="116" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.72"/>
-    <line x1="819" y1="116" x2="819" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="838" y="116" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
-    <line x1="863" y1="116" x2="863" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="892" y="116" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.72"/>
-    <line x1="903" y1="116" x2="903" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="804" y="92" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.76"/>
-    <line x1="829" y1="92" x2="829" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="858" y="92" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.98"/>
-    <line x1="883" y1="92" x2="883" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M808,138 L828,94" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="624" y="222" width="118" height="10" fill="#6b5138"/>
-    <rect x="632" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="676" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="720" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="626" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.95"/>
-    <line x1="646" y1="198" x2="646" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="670" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.84"/>
-    <line x1="690" y1="198" x2="690" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="714" y="198" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.77"/>
-    <line x1="725" y1="198" x2="725" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="626" y="174" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.84"/>
-    <line x1="651" y1="174" x2="651" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="680" y="174" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
-    <line x1="705" y1="174" x2="705" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M630,220 L650,176" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="802" y="222" width="118" height="10" fill="#6b5138"/>
-    <rect x="810" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="854" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="898" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="804" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.84"/>
-    <line x1="824" y1="198" x2="824" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="848" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.83"/>
-    <line x1="868" y1="198" x2="868" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="892" y="198" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.72"/>
-    <line x1="903" y1="198" x2="903" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="804" y="174" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.9"/>
-    <line x1="829" y1="174" x2="829" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="858" y="174" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
-    <line x1="873" y1="174" x2="873" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="892" y="174" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.8"/>
-    <line x1="903" y1="174" x2="903" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M808,220 L828,176" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="624" y="290" width="118" height="10" fill="#6b5138"/>
-    <rect x="632" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="676" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="720" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="626" y="266" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.79"/>
-    <line x1="646" y1="266" x2="646" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="670" y="266" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
-    <line x1="695" y1="266" x2="695" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="626" y="242" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.82"/>
-    <line x1="641" y1="242" x2="641" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="660" y="242" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.85"/>
-    <line x1="680" y1="242" x2="680" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="704" y="242" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
-    <line x1="720" y1="242" x2="720" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M630,288 L650,244" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="802" y="290" width="118" height="10" fill="#6b5138"/>
-    <rect x="810" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="854" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="898" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="804" y="266" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.83"/>
-    <line x1="829" y1="266" x2="829" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="858" y="266" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.97"/>
-    <line x1="878" y1="266" x2="878" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="804" y="242" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.77"/>
-    <line x1="824" y1="242" x2="824" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="848" y="242" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.9"/>
-    <line x1="873" y1="242" x2="873" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M808,288 L828,244" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="758" y="128" width="52" height="15" rx="2.5" fill="#20222a" stroke="#3a3d49" stroke-width="1.4"/>
-    <text x="784" y="139.5" font-family="Inter, sans-serif" font-size="9.5" letter-spacing="2" fill="#e9e3d8" opacity=".85" text-anchor="middle">BAY 2</text>
-  </g>
+        
+          <form id="leadForm" data-dc-tpl="20" style="display: flex; align-items: center; gap: 4px;">
+            <span data-dc-tpl="21" style="font-size: 15px; color: rgb(107, 107, 107);">or</span>
+            <input type="text" id="company_fax" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0;border:none">
+            <div data-dc-tpl="22" style="display: flex; border-bottom: 1.5px solid rgb(10, 10, 10); margin-left: 6px;">
+              <input id="email" data-dc-tpl="23" type="email" name="email" placeholder="you@store.com" style="width: 190px; border: none; outline: none; background: transparent; font-family: &quot;IBM Plex Sans&quot;, sans-serif; font-size: 15px; padding: 8px 2px; color: rgb(10, 10, 10);">
+              <button id="submitBtn" data-dc-tpl="24" type="submit" class="scp1" style="border: none; background: transparent; font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgb(10, 10, 10); cursor: pointer; padding: 0px 4px;">Get the free tool →</button>
+            </div>
+          </form>
+          <div id="thanks" style="display:none; flex-direction:column; align-items:center; gap:10px;">
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:.08em; color:rgb(10,10,10);">✅ YOU'RE IN — THE FREE TOOL IS ON ITS WAY TO YOUR INBOX</div>
+            <a id="templateBtn" href="#" target="_blank" rel="noopener" style="font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:rgb(10,10,10); border-bottom:1.5px solid rgb(10,10,10); text-decoration:none; padding:4px 2px;">Open the tool →</a>
+          </div>
+        
+        
 
-  <!-- rack bay 3 -->
-  <g>
-    <rect x="980" y="84" width="11" height="216" fill="#343945"/>
-    <rect x="1330" y="84" width="11" height="216" fill="#343945"/>
-    <line x1="991" y1="120" x2="1329" y2="84" stroke="#343945" stroke-width="3" opacity=".35"/>
-    <rect x="980" y="150" width="361" height="9" fill="#b05e33"/>
-    <rect x="980" y="159" width="361" height="2.5" fill="#7d3f20"/>
-    <rect x="980" y="232" width="361" height="9" fill="#b05e33"/>
-    <rect x="980" y="241" width="361" height="2.5" fill="#7d3f20"/>
-    <rect x="1004" y="140" width="118" height="10" fill="#6b5138"/>
-    <rect x="1012" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1056" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1100" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1006" y="116" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.9"/>
-    <line x1="1031" y1="116" x2="1031" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1060" y="116" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.79"/>
-    <line x1="1075" y1="116" x2="1075" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1094" y="116" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.94"/>
-    <line x1="1105" y1="116" x2="1105" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1006" y="92" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.95"/>
-    <line x1="1021" y1="92" x2="1021" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1040" y="92" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.96"/>
-    <line x1="1065" y1="92" x2="1065" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1094" y="92" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.83"/>
-    <line x1="1105" y1="92" x2="1105" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M1010,138 L1030,94" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="1182" y="140" width="118" height="10" fill="#6b5138"/>
-    <rect x="1190" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1234" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1278" y="144" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1184" y="116" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.92"/>
-    <line x1="1204" y1="116" x2="1204" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1228" y="116" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.78"/>
-    <line x1="1243" y1="116" x2="1243" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1262" y="116" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
-    <line x1="1278" y1="116" x2="1278" y2="138" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1184" y="92" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.94"/>
-    <line x1="1199" y1="92" x2="1199" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1218" y="92" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
-    <line x1="1238" y1="92" x2="1238" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1262" y="92" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.83"/>
-    <line x1="1278" y1="92" x2="1278" y2="114" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M1188,138 L1208,94" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="1004" y="222" width="118" height="10" fill="#6b5138"/>
-    <rect x="1012" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1056" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1100" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1006" y="198" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.83"/>
-    <line x1="1021" y1="198" x2="1021" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1040" y="198" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
-    <line x1="1060" y1="198" x2="1060" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1084" y="198" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.94"/>
-    <line x1="1100" y1="198" x2="1100" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1006" y="174" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
-    <line x1="1026" y1="174" x2="1026" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1050" y="174" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.77"/>
-    <line x1="1075" y1="174" x2="1075" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M1010,220 L1030,176" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="1182" y="222" width="118" height="10" fill="#6b5138"/>
-    <rect x="1190" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1234" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1278" y="226" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1184" y="198" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.96"/>
-    <line x1="1209" y1="198" x2="1209" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1238" y="198" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.77"/>
-    <line x1="1263" y1="198" x2="1263" y2="220" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1184" y="174" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.86"/>
-    <line x1="1209" y1="174" x2="1209" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1238" y="174" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.92"/>
-    <line x1="1253" y1="174" x2="1253" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1272" y="174" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.73"/>
-    <line x1="1283" y1="174" x2="1283" y2="196" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M1188,220 L1208,176" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="1004" y="290" width="118" height="10" fill="#6b5138"/>
-    <rect x="1012" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1056" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1100" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1006" y="266" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.78"/>
-    <line x1="1021" y1="266" x2="1021" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1040" y="266" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.98"/>
-    <line x1="1065" y1="266" x2="1065" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1094" y="266" width="23" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.9"/>
-    <line x1="1105" y1="266" x2="1105" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1006" y="242" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.89"/>
-    <line x1="1031" y1="242" x2="1031" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1060" y="242" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
-    <line x1="1080" y1="242" x2="1080" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M1010,288 L1030,244" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="1182" y="290" width="118" height="10" fill="#6b5138"/>
-    <rect x="1190" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1234" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1278" y="294" width="14" height="6" fill="#141519" opacity=".55"/>
-    <rect x="1184" y="266" width="51" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.84"/>
-    <line x1="1209" y1="266" x2="1209" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1238" y="266" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.97"/>
-    <line x1="1258" y1="266" x2="1258" y2="288" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1184" y="242" width="31" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.74"/>
-    <line x1="1199" y1="242" x2="1199" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1218" y="242" width="41" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.93"/>
-    <line x1="1238" y1="242" x2="1238" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <rect x="1262" y="242" width="33" height="22" rx="1.5" fill="url(#boxglow)" opacity="0.79"/>
-    <line x1="1278" y1="242" x2="1278" y2="264" stroke="#1b1d24" stroke-width="1.6" opacity=".45"/>
-    <path d="M1188,288 L1208,244" stroke="#ffffff" stroke-width="5" opacity=".07" stroke-linecap="round"/>
-    <rect x="1138" y="128" width="52" height="15" rx="2.5" fill="#20222a" stroke="#3a3d49" stroke-width="1.4"/>
-    <text x="1164" y="139.5" font-family="Inter, sans-serif" font-size="9.5" letter-spacing="2" fill="#e9e3d8" opacity=".85" text-anchor="middle">BAY 3</text>
-  </g>
-
-  <!-- floor safety stripes -->
-  <g stroke="#c9cdd8" stroke-width="4" opacity=".12" stroke-linecap="round">
-    <path d="M240,392 L266,344"/>
-    <path d="M480,392 L506,344"/>
-    <path d="M720,392 L746,344"/>
-    <path d="M960,392 L986,344"/>
-    <path d="M1200,392 L1226,344"/>
-  </g>
-
-  <!-- warm light spill under racks -->
-  <g opacity=".08" fill="#f6cf96">
-    <ellipse cx="400" cy="312" rx="180" ry="14"/>
-    <ellipse cx="780" cy="312" rx="180" ry="14"/>
-    <ellipse cx="1160" cy="312" rx="180" ry="14"/>
-  </g>
-</svg>
-</div>
-<div class="grain"></div>
-
-<div class="shell">
-  <header class="hero wrap">
-    <a class="brand" href="https://doctordigits.com" aria-label="DrDigits">DrDigits</a>
-    <h1>Radically simple<br>inventory buying</h1>
-    <p class="tagline">(open-to-buy for Shopify brands)</p>
-    <p class="sub">If you had $50,000 to spend on inventory this week, would you know what to buy first? One 8-figure brand’s software said order <b>6× the math</b><span class="sup">1</span> — while their best seller bled <b>~$1,000 a day</b> to stockouts.</p>
-
-    <div class="ctarow" id="ctaRow">
-      <div class="hp" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0"><label>Company fax</label><input type="text" id="company_fax" tabindex="-1" autocomplete="off" /></div>
-      <div class="emailwrap">
-        <input type="email" id="email" placeholder="Enter your email" />
-        <button class="btn" id="submitBtn" onclick="submitEmail()">Get the free tool</button>
+        <div data-dc-tpl="27" style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 11px; letter-spacing: 0.06em; color: rgb(138, 135, 127);">Free · no card · your data stays in your sheet</div>
       </div>
-      <a href="#" class="btn-ghost" id="callBtn" target="_blank" rel="noopener">Book a free 30-min call</a>
-    </div>
-    <div class="thanks" id="thanks">
-      <p>✅ You're in — the free tool is on its way to your inbox.</p>
-      <p class="note">Two Shopify exports in, one ranked buy list out — the walkthrough link is in the email.</p>
-      <div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap">
-        <a href="#" class="btn" id="templateBtn" target="_blank" rel="noopener">Open the tool</a>
-        <a href="#" class="btn-ghost" id="callBtnThanks" target="_blank" rel="noopener">Book a free 30-min call</a>
+
+      <div data-dc-tpl="28" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0px; margin-top: 48px; border-top: 1px solid rgb(10, 10, 10); border-bottom: 1px solid rgb(228, 226, 220);">
+        <div data-dc-tpl="29" style="padding: 22px 12px; border-right: 1px solid rgb(228, 226, 220);"><div data-dc-tpl="30" style="font-family: Newsreader, serif; font-size: 34px; font-weight: 500;"><span data-dc-tpl="31" style="background-image: linear-gradient(transparent 60%, rgb(126, 249, 143) 60%);">6×</span></div><div data-dc-tpl="32" style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 10px; letter-spacing: 0.08em; color: rgb(138, 135, 127); margin-top: 6px; text-transform: uppercase; line-height: 1.4;">software said order</div></div>
+        <div data-dc-tpl="33" style="padding: 22px 12px; border-right: 1px solid rgb(228, 226, 220);"><div data-dc-tpl="34" style="font-family: Newsreader, serif; font-size: 34px; font-weight: 500;">10 yrs</div><div data-dc-tpl="35" style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 10px; letter-spacing: 0.08em; color: rgb(138, 135, 127); margin-top: 6px; text-transform: uppercase; line-height: 1.4;">overstock cover</div></div>
+        <div data-dc-tpl="36" style="padding: 22px 12px;"><div data-dc-tpl="37" style="font-family: Newsreader, serif; font-size: 34px; font-weight: 500;"><span data-dc-tpl="38" style="background-image: linear-gradient(transparent 60%, rgb(126, 249, 143) 60%);">~$1k</span></div><div data-dc-tpl="39" style="font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 10px; letter-spacing: 0.08em; color: rgb(138, 135, 127); margin-top: 6px; text-transform: uppercase; line-height: 1.4;">/day to stockouts</div></div>
       </div>
-    </div>
 
-    <div class="proof">
-      <div class="chip"><span class="n">6× the math</span><span class="l">what software told an 8-figure brand to order</span></div>
-      <div class="chip"><span class="n">10 years of cover</span><span class="l">26 styles overstocked while the best seller sold out</span></div>
-      <div class="chip"><span class="n">~$1,000/day</span><span class="l">one top seller bleeding sales to stockouts</span></div>
+      <p data-dc-tpl="40" style="margin: 22px 0px 0px; font-family: &quot;IBM Plex Mono&quot;, monospace; font-size: 11px; line-height: 1.6; color: rgb(154, 151, 143);">1 · Real, anonymized client findings — not a guarantee of your results. Not financial advice.</p>
     </div>
-  </header>
-
-  <div class="discbar wrap">
-    <span class="sup">1</span> Real, anonymized client findings — not a guarantee of your results. Not financial advice.
-  </div>
-</div>
+  </div></div></div></div>
 
 <script>
 /* ===== CONFIG ===== */
@@ -524,9 +74,8 @@ const APPS_SCRIPT_URL    = "https://script.google.com/macros/s/AKfycbyu_Qr8zyI25
 const TEMPLATE_COPY_LINK = "https://docs.google.com/spreadsheets/d/1oxCxESKJMHl8yIeNMSbiQORFqOX1-SAEQGVEpplB3zM/copy";
 const CALENDLY_LINK      = "https://calendly.com/kyle-doctordigits/30min";
 /* ================== */
-document.getElementById('templateBtn').href   = TEMPLATE_COPY_LINK;
-document.getElementById('callBtn').href       = CALENDLY_LINK;
-document.getElementById('callBtnThanks').href = CALENDLY_LINK;
+document.getElementById('callBtn').href     = CALENDLY_LINK;
+document.getElementById('templateBtn').href = TEMPLATE_COPY_LINK;
 
 function getVisitorId(){
   try{ let id=localStorage.getItem('drd_vid'); const ret=!!id;
@@ -554,18 +103,21 @@ function sendEngagement(){ send({type:'engagement',visitorId:VISITOR.id,timeOnPa
 window.addEventListener('pagehide',sendEngagement);
 document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden') sendEngagement(); });
 
-function submitEmail(){
+document.getElementById('leadForm').addEventListener('submit', function(ev){
+  ev.preventDefault();
   var input=document.getElementById('email'), btn=document.getElementById('submitBtn');
   var v=input.value.trim();
   var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-  if(!ok){ input.placeholder='Enter a valid email'; input.value=''; return; }
+  if(!ok){ input.placeholder='enter a valid email'; input.value=''; return; }
   if(document.getElementById('company_fax').value.trim()!==''){ return; }
   if(Date.now()-START<2000){ return; }
   btn.disabled=true; btn.textContent='Sending…'; submitted=true;
   send(Object.assign({type:'lead',visitorId:VISITOR.id,name:'',email:v,phone:'',website:'',role:''},PARAMS,{timezone:ENV.timezone,userAgent:ENV.userAgent,referrer:PARAMS.referrer}));
-  setTimeout(function(){ document.getElementById('ctaRow').style.display='none'; document.getElementById('thanks').style.display='block'; },400);
-}
-document.getElementById('email').addEventListener('keydown',function(e){ if(e.key==='Enter') submitEmail(); });
+  setTimeout(function(){
+    document.getElementById('leadForm').style.display='none';
+    document.getElementById('thanks').style.display='flex';
+  },400);
+});
 </script>
 </body>
 </html>
